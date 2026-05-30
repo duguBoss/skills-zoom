@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1",
+    "name": "skills-zoom",
+    "repoUrl": "https://github.com/duguBoss/skills-zoom",
+    "description": "一个 Skill 聚合分享平台，支持标签筛选、批量导出项目地址。好用的 Skill 都在这里汇集。",
+    "tags": ["工具平台", "Vue3", "社区"],
+    "author": "黑曜石科技工坊",
+    "addedAt": "2025-05-30"
+  },
+  {
+    "id": "2",
+    "name": "awesome-python",
+    "repoUrl": "https://github.com/vinta/awesome-python",
+    "description": "精选的 Python 框架、库、软件和资源的集合，Python 开发者必备参考。",
+    "tags": ["Python", "资源汇总", "开发工具"],
+    "author": "vinta",
+    "addedAt": "2025-05-28"
+  },
+  {
+    "id": "3",
+    "name": "free-programming-books",
+    "repoUrl": "https://github.com/EbookFoundation/free-programming-books",
+    "description": "免费可用的编程书籍列表，涵盖几乎所有编程语言和技术栈。",
+    "tags": ["学习资源", "书籍", "多语言"],
+    "author": "EbookFoundation",
+    "addedAt": "2025-05-25"
+  },
+  {
+    "id": "4",
+    "name": "developer-roadmap",
+    "repoUrl": "https://github.com/kamranahmedse/developer-roadmap",
+    "description": "交互式开发者路线图、指南和其他教育内容，帮助开发者规划学习路径。",
+    "tags": ["学习路径", "职业规划", "前端", "后端"],
+    "author": "kamranahmedse",
+    "addedAt": "2025-05-20"
+  },
+  {
+    "id": "5",
+    "name": "system-design-primer",
+    "repoUrl": "https://github.com/donnemartin/system-design-primer",
+    "description": "学习如何设计大规模系统，为系统设计面试做准备。",
+    "tags": ["系统设计", "面试", "架构", "学习资源"],
+    "author": "donnemartin",
+    "addedAt": "2025-05-18"
+  },
+  {
+    "id": "6",
+    "name": "rustlings",
+    "repoUrl": "https://github.com/rust-lang/rustlings",
+    "description": "通过解决小型练习来学习 Rust，适合 Rust 初学者的实践项目。",
+    "tags": ["Rust", "学习", "练习"],
+    "author": "rust-lang",
+    "addedAt": "2025-05-15"
+  },
+  {
+    "id": "7",
+    "name": "obsidian-git",
+    "repoUrl": "https://github.com/denolehov/obsidian-git",
+    "description": "Obsidian 笔记的 Git 备份集成插件，支持自动提交和同步。",
+    "tags": ["Obsidian", "Git", "笔记", "效率工具"],
+    "author": "denolehov",
+    "addedAt": "2025-05-10"
+  },
+  {
+    "id": "8",
+    "name": "rembg",
+    "repoUrl": "https://github.com/danielgatis/rembg",
+    "description": "一键去除图片背景的工具，支持命令行和作为 Python 库使用。",
+    "tags": ["图像处理", "AI", "Python", "工具"],
+    "author": "danielgatis",
+    "addedAt": "2025-05-08"
+  }
+]
