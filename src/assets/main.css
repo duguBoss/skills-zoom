@@ -1,29 +1,30 @@
 :root {
-  --sz-primary: #7c3aed;
-  --sz-primary-light: #a78bfa;
-  --sz-primary-dark: #5b21b6;
-  --sz-accent: #06b6d4;
-  --sz-accent-light: #67e8f9;
-  --sz-bg: #09090b;
-  --sz-bg-card: #18181b;
-  --sz-bg-card-hover: #1f1f23;
-  --sz-bg-surface: #0f0f12;
-  --sz-bg-elevated: #27272a;
-  --sz-text: #fafafa;
-  --sz-text-secondary: #a1a1aa;
-  --sz-text-muted: #71717a;
-  --sz-border: #27272a;
-  --sz-border-light: #3f3f46;
-  --sz-gradient: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
-  --sz-gradient-subtle: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(6,182,212,0.15) 100%);
-  --sz-radius-sm: 8px;
-  --sz-radius-md: 12px;
-  --sz-radius-lg: 16px;
-  --sz-radius-xl: 24px;
-  --sz-shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-  --sz-shadow-md: 0 4px 12px rgba(0,0,0,0.4);
-  --sz-shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
-  --sz-shadow-glow: 0 0 20px rgba(124,58,237,0.15);
+  --sz-bg: #f8f9fa;
+  --sz-bg-card: #ffffff;
+  --sz-bg-hover: #f1f3f5;
+  --sz-bg-surface: #ffffff;
+  --sz-bg-muted: #e9ecef;
+  --sz-text: #212529;
+  --sz-text-secondary: #6c757d;
+  --sz-text-muted: #adb5bd;
+  --sz-border: #e9ecef;
+  --sz-border-light: #f1f3f5;
+  --sz-primary: #4263eb;
+  --sz-primary-light: #748ffc;
+  --sz-primary-bg: #edf2ff;
+  --sz-accent: #0ca678;
+  --sz-accent-bg: #e6fcf5;
+  --sz-warning: #f59f00;
+  --sz-warning-bg: #fff9db;
+  --sz-danger: #e03131;
+  --sz-radius: 10px;
+  --sz-radius-lg: 14px;
+  --sz-radius-full: 9999px;
+  --sz-shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --sz-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --sz-shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  --sz-shadow-lg: 0 12px 32px rgba(0,0,0,0.08);
+  --sz-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 *,
@@ -43,8 +44,8 @@ body {
   background-color: var(--sz-bg);
   color: var(--sz-text);
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI',
-    'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', Arial, sans-serif;
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue',
+    Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
@@ -58,11 +59,16 @@ a {
 
 button {
   font-family: inherit;
+  cursor: pointer;
+}
+
+input, textarea {
+  font-family: inherit;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -70,12 +76,12 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--sz-border-light);
+  background: #d0d5dd;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--sz-primary);
+  background: #a0a5ad;
 }
 
 ::selection {
@@ -84,7 +90,7 @@ button {
 }
 
 @media (max-width: 768px) {
-  :root {
-    font-size: 14px;
+  html {
+    font-size: 15px;
   }
 }

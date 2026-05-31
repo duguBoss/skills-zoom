@@ -1,14 +1,11 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useSkillsStore } from '@/stores/skills'
 import SkillCard from '@/components/SkillCard.vue'
-import { Search, Download, Check, Close } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 
 const store = useSkillsStore()
-
-function handleTagClick(tag: string) {
-  store.toggleTag(tag)
-}
+const mobileFilterOpen = ref(false)
 
 function handleExport() {
   if (store.selectedSkillIds.length === 0) {
@@ -20,7 +17,7 @@ function handleExport() {
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = `skills-export-${new Date().toISOString().slice(0, 10)}.txt`
+  a.download = `skills-${new Date().toISOString().slice(0, 10)}.txt`
   document.body.appendChild(a)
   a.click()
   document.body.removeChild(a)
@@ -36,345 +33,288 @@ function handleCopy() {
   const content = store.exportSelected()
   navigator.clipboard.writeText(content).then(() => {
     ElMessage.success('已复制到剪贴板')
-  }).catch(() => {
-    ElMessage.error('复制失败')
   })
-}
-
-function clearFilters() {
-  store.selectedTags = []
-  store.searchQuery = ''
 }
 </script>
 
 <template>
   <div class="home">
     <section class="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-content">
-        <h1 class="hero-title">发现优质 <span class="gradient-text">AI Skill</span></h1>
-        <p class="hero-sub">聚合分享最好用的 AI 技能、Agent 工具与开源项目</p>
-      </div>
+      <h1 class="hero-title">发现优质 <em>AI Skill</em></h1>
+      <p class="hero-sub">收集、分享、管理最好用的 AI 技能和插件，让 AI 助手能力无限扩展</p>
     </section>
 
-    <section class="toolbar-section">
-      <div class="search-wrap">
-        <el-icon class="search-icon"><Search /></el-icon>
+    <section class="controls">
+      <div class="search-bar">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+          <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/>
+        </svg>
         <input
           v-model="store.searchQuery"
           class="search-input"
           placeholder="搜索 Skill 名称、描述或标签..."
         />
-        <button v-if="store.searchQuery" class="search-clear" @click="store.searchQuery = ''">✕</button>
+        <button v-if="store.searchQuery" class="clear-search" @click="store.searchQuery = ''">✕</button>
       </div>
 
-      <div class="action-bar">
+      <div class="action-row">
         <div class="action-left">
-          <button class="tb-btn" @click="handleExport" :disabled="store.selectedSkillIds.length === 0">
-            <el-icon><Download /></el-icon><span class="btn-text">导出</span>
+          <button class="act-btn" @click="handleExport" :disabled="store.selectedSkillIds.length === 0">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            导出
           </button>
-          <button class="tb-btn" @click="handleCopy" :disabled="store.selectedSkillIds.length === 0">
-            <el-icon><Check /></el-icon><span class="btn-text">复制</span>
+          <button class="act-btn" @click="handleCopy" :disabled="store.selectedSkillIds.length === 0">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            复制
           </button>
-          <button v-if="store.selectedSkillIds.length > 0" class="tb-btn warn" @click="store.clearSelection">
-            <el-icon><Close /></el-icon><span class="btn-text">清空</span>
+          <button v-if="store.selectedSkillIds.length > 0" class="act-btn danger" @click="store.clearSelection">
+            清空
           </button>
-          <span v-if="store.selectedSkillIds.length > 0" class="sel-count">
+          <span v-if="store.selectedSkillIds.length > 0" class="sel-badge">
             已选 {{ store.selectedSkillIds.length }}
           </span>
         </div>
-        <button class="select-all" @click="store.selectAllVisible">
-          {{ store.filteredSkills.every(s => store.selectedSkillIds.includes(s.id)) ? '取消全选' : '全选当前' }}
-        </button>
+        <div class="action-right">
+          <button class="act-btn" @click="store.selectAllVisible">
+            {{ store.filteredSkills.every(s => store.selectedSkillIds.includes(s.id)) ? '取消全选' : '全选当前' }}
+          </button>
+          <span class="count-tag">{{ store.filteredSkills.length }} 个 Skill</span>
+        </div>
       </div>
     </section>
 
-    <section class="tags-section" v-if="store.allTags.length > 0">
-      <div class="tags-scroll">
+    <section class="tag-section">
+      <div class="tag-scroll">
         <button
           v-for="tag in store.allTags"
           :key="tag"
-          :class="['tag-chip', { active: store.selectedTags.includes(tag) }]"
-          @click="handleTagClick(tag)"
+          :class="['tag-chip', { on: store.selectedTags.includes(tag) }]"
+          @click="store.toggleTag(tag)"
         >{{ tag }}</button>
         <button
           v-if="store.selectedTags.length > 0 || store.searchQuery"
-          class="tag-chip clear"
-          @click="clearFilters"
-        >清除筛选</button>
+          class="tag-chip reset"
+          @click="store.selectedTags = []; store.searchQuery = ''"
+        >重置筛选</button>
       </div>
     </section>
 
-    <div class="result-info">
-      <span class="total">共 {{ store.filteredSkills.length }} 个 Skill</span>
-    </div>
-
     <div v-if="store.filteredSkills.length === 0" class="empty">
       <div class="empty-icon">🔍</div>
-      <p class="empty-text">没有找到匹配的 Skill</p>
-      <button class="empty-btn" @click="clearFilters">清除筛选</button>
+      <p>没有匹配的 Skill</p>
+      <button class="empty-btn" @click="store.selectedTags = []; store.searchQuery = ''">清除筛选</button>
     </div>
 
-    <div class="skill-grid" v-else>
-      <SkillCard
-        v-for="skill in store.filteredSkills"
-        :key="skill.id"
-        :skill="skill"
-      />
+    <div v-else class="grid">
+      <SkillCard v-for="skill in store.filteredSkills" :key="skill.id" :skill="skill" />
     </div>
   </div>
 </template>
 
 <style scoped>
 .home {
-  padding-bottom: 60px;
+  padding-bottom: 20px;
 }
 .hero {
-  position: relative;
   text-align: center;
-  padding: 48px 0 36px;
-  overflow: hidden;
-}
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(124,58,237,0.12) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero-content {
-  position: relative;
+  padding: 32px 0 28px;
 }
 .hero-title {
-  margin: 0 0 10px;
-  font-size: 32px;
+  font-size: 1.8rem;
   font-weight: 800;
   color: var(--sz-text);
+  margin: 0 0 6px;
   letter-spacing: -0.5px;
-  line-height: 1.2;
 }
-.gradient-text {
-  background: var(--sz-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.hero-title em {
+  font-style: normal;
+  color: var(--sz-primary);
 }
 .hero-sub {
-  margin: 0;
-  font-size: 15px;
+  font-size: 0.9rem;
   color: var(--sz-text-secondary);
+  margin: 0;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
-.toolbar-section {
+.controls {
   margin-bottom: 16px;
 }
-.search-wrap {
+.search-bar {
   position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .search-icon {
   position: absolute;
-  left: 14px;
+  left: 12px;
   color: var(--sz-text-muted);
-  font-size: 16px;
   pointer-events: none;
 }
 .search-input {
   width: 100%;
+  padding: 10px 36px 10px 38px;
+  border: 1.5px solid var(--sz-border);
+  border-radius: var(--sz-radius);
   background: var(--sz-bg-card);
-  border: 1px solid var(--sz-border);
-  border-radius: var(--sz-radius-md);
-  padding: 11px 40px 11px 42px;
+  font-size: 0.88rem;
   color: var(--sz-text);
-  font-size: 14px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color var(--sz-transition);
 }
 .search-input::placeholder {
   color: var(--sz-text-muted);
 }
 .search-input:focus {
   border-color: var(--sz-primary);
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
 }
-.search-clear {
+.clear-search {
   position: absolute;
-  right: 12px;
+  right: 10px;
   background: none;
   border: none;
   color: var(--sz-text-muted);
-  cursor: pointer;
-  font-size: 12px;
+  font-size: 0.8rem;
   padding: 4px;
 }
-.action-bar {
+
+.action-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
   flex-wrap: wrap;
+  gap: 8px;
 }
-.action-left {
+.action-left,
+.action-right {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
 }
-.tb-btn {
+.act-btn {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 7px 14px;
-  border-radius: var(--sz-radius-sm);
-  border: 1px solid var(--sz-border);
+  padding: 6px 12px;
+  border-radius: 7px;
+  border: 1.5px solid var(--sz-border);
   background: var(--sz-bg-card);
   color: var(--sz-text-secondary);
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all var(--sz-transition);
 }
-.tb-btn:hover:not(:disabled) {
+.act-btn:hover:not(:disabled) {
   border-color: var(--sz-primary);
-  color: var(--sz-primary-light);
+  color: var(--sz-primary);
 }
-.tb-btn:disabled {
-  opacity: 0.35;
+.act-btn:disabled {
+  opacity: 0.4;
   cursor: not-allowed;
 }
-.tb-btn.warn:hover {
-  border-color: #ef4444;
-  color: #ef4444;
+.act-btn.danger:hover {
+  border-color: var(--sz-danger);
+  color: var(--sz-danger);
 }
-.sel-count {
-  font-size: 13px;
-  color: var(--sz-accent);
+.sel-badge {
+  font-size: 0.78rem;
+  color: var(--sz-primary);
   font-weight: 600;
 }
-.select-all {
-  background: none;
-  border: none;
-  color: var(--sz-primary-light);
-  font-size: 13px;
-  cursor: pointer;
-  padding: 0;
-}
-.select-all:hover {
-  text-decoration: underline;
+.count-tag {
+  font-size: 0.78rem;
+  color: var(--sz-text-muted);
 }
 
-.tags-section {
-  margin-bottom: 16px;
+.tag-section {
+  margin-bottom: 18px;
 }
-.tags-scroll {
+.tag-scroll {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 .tag-chip {
-  padding: 5px 12px;
+  padding: 4px 11px;
   border-radius: 20px;
-  border: 1px solid var(--sz-border);
+  border: 1.5px solid var(--sz-border);
   background: var(--sz-bg-card);
   color: var(--sz-text-secondary);
-  font-size: 12px;
+  font-size: 0.76rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all var(--sz-transition);
   white-space: nowrap;
 }
 .tag-chip:hover {
   border-color: var(--sz-primary);
-  color: var(--sz-primary-light);
+  color: var(--sz-primary);
 }
-.tag-chip.active {
+.tag-chip.on {
   background: var(--sz-primary);
   color: #fff;
   border-color: var(--sz-primary);
 }
-.tag-chip.clear {
+.tag-chip.reset {
   border-style: dashed;
-  color: var(--sz-text-muted);
-}
-.tag-chip.clear:hover {
-  color: var(--sz-accent);
-  border-color: var(--sz-accent);
-}
-
-.result-info {
-  margin-bottom: 16px;
-}
-.total {
-  font-size: 13px;
   color: var(--sz-text-muted);
 }
 
 .empty {
   text-align: center;
-  padding: 60px 0;
+  padding: 48px 0;
 }
 .empty-icon {
-  font-size: 40px;
-  margin-bottom: 12px;
+  font-size: 2rem;
+  margin-bottom: 8px;
 }
-.empty-text {
+.empty p {
   color: var(--sz-text-muted);
-  margin: 0 0 16px;
-  font-size: 14px;
+  font-size: 0.88rem;
+  margin: 0 0 12px;
 }
 .empty-btn {
-  padding: 8px 20px;
-  border-radius: var(--sz-radius-sm);
-  border: 1px solid var(--sz-border);
+  padding: 6px 16px;
+  border-radius: 7px;
+  border: 1.5px solid var(--sz-border);
   background: var(--sz-bg-card);
   color: var(--sz-text-secondary);
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.empty-btn:hover {
-  border-color: var(--sz-primary);
-  color: var(--sz-primary-light);
+  font-size: 0.82rem;
 }
 
-.skill-grid {
+.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 14px;
 }
 
 @media (max-width: 768px) {
   .hero {
-    padding: 28px 0 20px;
+    padding: 20px 0;
   }
   .hero-title {
-    font-size: 24px;
+    font-size: 1.4rem;
   }
   .hero-sub {
-    font-size: 13px;
+    font-size: 0.82rem;
   }
-  .btn-text {
-    display: none;
-  }
-  .tb-btn {
-    padding: 7px 10px;
-  }
-  .skill-grid {
+  .grid {
     grid-template-columns: 1fr;
     gap: 10px;
   }
-  .tags-scroll {
+  .tag-scroll {
     overflow-x: auto;
     flex-wrap: nowrap;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 4px;
   }
-  .tags-scroll::-webkit-scrollbar {
-    display: none;
-  }
+  .tag-scroll::-webkit-scrollbar { display: none; }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .skill-grid {
+  .grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }

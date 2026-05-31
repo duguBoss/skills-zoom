@@ -1,227 +1,227 @@
 [
   {
     "id": "1",
-    "name": "LangChain",
-    "repoUrl": "https://github.com/langchain-ai/langchain",
-    "description": "构建基于大语言模型应用的核心框架，提供链式调用、Agent 编排、工具集成、记忆管理等模块化组件，支持 Python 和 JavaScript，是 AI Agent 开发领域最流行的开源项目之一，拥有庞大的生态和社区。",
-    "tags": ["AI Agent", "框架", "LLM", "工具集成", "Python"],
-    "author": "langchain-ai",
-    "addedAt": "2025-12-20"
+    "name": "Python Code Runner",
+    "repoUrl": "https://github.com/modelcontextprotocol/servers",
+    "description": "MCP 官方代码执行 Skill，让 AI 助手在沙箱中安全运行 Python 代码，支持文件读写、网络请求等操作。",
+    "tags": ["MCP", "代码执行", "Python"],
+    "author": "Anthropic",
+    "addedAt": "2025-06-10"
   },
   {
     "id": "2",
-    "name": "MCP Servers",
+    "name": "Brave Web Search",
     "repoUrl": "https://github.com/modelcontextprotocol/servers",
-    "description": "Model Context Protocol 官方参考服务器集合，提供文件系统、GitHub、GitLab、Postgres、Slack、Google Drive 等多种 MCP Server 实现，是理解和使用 MCP 协议的最佳起点，支持 AI 模型安全访问外部工具和数据源。",
-    "tags": ["MCP", "工具集成", "协议", "AI Agent", "插件"],
-    "author": "modelcontextprotocol",
-    "addedAt": "2025-12-15"
+    "description": "为 AI 助手提供网络搜索能力，支持实时网页搜索和新闻查询，让 AI 获取最新信息。",
+    "tags": ["MCP", "搜索", "工具"],
+    "author": "Anthropic",
+    "addedAt": "2025-06-08"
   },
   {
     "id": "3",
-    "name": "awesome-mcp-servers",
-    "repoUrl": "https://github.com/punkpeye/awesome-mcp-servers",
-    "description": "MCP Server 生态的精选列表，收录了数百个社区贡献的 MCP Server 实现，涵盖数据库、API 集成、开发工具、搜索引擎等类别，是发现和选择 MCP 工具的首选资源。",
-    "tags": ["MCP", "资源汇总", "工具集成", "社区"],
-    "author": "punkpeye",
-    "addedAt": "2025-12-10"
+    "name": "GitHub MCP Server",
+    "repoUrl": "https://github.com/modelcontextprotocol/servers",
+    "description": "让 AI 助手直接操作 GitHub 仓库，管理 Issue、PR、文件等，实现 AI 驱动的代码工作流。",
+    "tags": ["MCP", "GitHub", "DevOps"],
+    "author": "Anthropic",
+    "addedAt": "2025-06-05"
   },
   {
     "id": "4",
-    "name": "Cline",
-    "repoUrl": "https://github.com/cline/cline",
-    "description": "VS Code 中的自主 AI 编程代理，能够创建/编辑文件、执行终端命令、使用浏览器，支持 MCP 工具扩展。可接入 Claude、GPT、DeepSeek 等多种模型，是 AI 辅助编程领域最活跃的开源项目之一。",
-    "tags": ["AI Agent", "代码生成", "VS Code", "MCP", "插件"],
-    "author": "cline",
-    "addedAt": "2025-12-05"
+    "name": "Puppeteer Browser Control",
+    "repoUrl": "https://github.com/modelcontextprotocol/servers",
+    "description": "AI 控制浏览器完成网页自动化操作，支持截图、表单填写、页面抓取等浏览器技能。",
+    "tags": ["MCP", "浏览器", "自动化"],
+    "author": "Anthropic",
+    "addedAt": "2025-06-03"
   },
   {
     "id": "5",
-    "name": "AutoGPT",
-    "repoUrl": "https://github.com/Significant-Gravitas/AutoGPT",
-    "description": "首个自主 AI Agent 框架，让 GPT-4 等大模型自主完成复杂任务。支持目标分解、工具调用、互联网搜索、代码执行和文件操作，开创了 AI Agent 自主行动的范式，是 Agent 领域最具影响力的项目。",
-    "tags": ["AI Agent", "自主代理", "LLM", "自动化"],
-    "author": "Significant-Gravitas",
-    "addedAt": "2025-11-28"
+    "name": "Sequential Thinking",
+    "repoUrl": "https://github.com/modelcontextprotocol/servers",
+    "description": "增强 AI 的深度推理能力，通过多步思考链解决复杂问题，适合数学、逻辑分析场景。",
+    "tags": ["MCP", "推理", "思维链"],
+    "author": "Anthropic",
+    "addedAt": "2025-06-01"
   },
   {
     "id": "6",
-    "name": "CrewAI",
-    "repoUrl": "https://github.com/crewAIInc/crewAI",
-    "description": "多 Agent 协作框架，支持定义具有不同角色和目标的 AI Agent 组成团队协作完成任务。提供流程编排、工具分配、记忆系统和人类输入反馈机制，适合构建复杂的多角色 AI 工作流。",
-    "tags": ["AI Agent", "多Agent", "协作", "工作流", "框架"],
-    "author": "crewAIInc",
-    "addedAt": "2025-11-22"
+    "name": "Memory Knowledge Base",
+    "repoUrl": "https://github.com/modelcontextprotocol/servers",
+    "description": "为 AI 助手提供持久化记忆能力，记住用户偏好和历史对话，实现个性化智能交互。",
+    "tags": ["MCP", "记忆", "知识库"],
+    "author": "Anthropic",
+    "addedAt": "2025-05-30"
   },
   {
     "id": "7",
-    "name": "Dify",
-    "repoUrl": "https://github.com/langgenius/dify",
-    "description": "开源 LLM 应用开发平台，提供可视化的工作流编排、RAG 管道、Agent 构建和模型管理功能。支持拖拽式构建 AI 应用，内置数百种工具集成，适合快速搭建生产级 AI 应用。",
-    "tags": ["工作流", "RAG", "AI Agent", "低代码", "平台"],
-    "author": "langgenius",
-    "addedAt": "2025-11-15"
+    "name": "PostgreSQL Explorer",
+    "repoUrl": "https://github.com/modelcontextprotocol/servers",
+    "description": "AI 直接查询和管理 PostgreSQL 数据库，支持 Schema 浏览、SQL 执行、数据分析。",
+    "tags": ["MCP", "数据库", "SQL"],
+    "author": "Anthropic",
+    "addedAt": "2025-05-28"
   },
   {
     "id": "8",
-    "name": "AutoGen",
-    "repoUrl": "https://github.com/microsoft/autogen",
-    "description": "微软开源的多 Agent 对话框架，支持 Agent 之间自主对话协作解决任务。提供可定制的 Agent 行为、灵活的对话模式、代码执行和人类参与机制，是学术研究和企业级 Agent 开发的重要工具。",
-    "tags": ["AI Agent", "多Agent", "框架", "微软", "对话"],
-    "author": "microsoft",
-    "addedAt": "2025-11-08"
+    "name": "Obsidian Markdown",
+    "repoUrl": "https://github.com/Pdwud/obsidian-mcp",
+    "description": "连接 Obsidian 笔记库，让 AI 助手读取、搜索、创建笔记，打造智能知识管理助手。",
+    "tags": ["MCP", "Obsidian", "笔记"],
+    "author": "Pdwud",
+    "addedAt": "2025-05-25"
   },
   {
     "id": "9",
-    "name": "Semantic Kernel",
-    "repoUrl": "https://github.com/microsoft/semantic-kernel",
-    "description": "微软开源的 AI 编排 SDK，支持将大语言模型能力与传统编程语言（C#、Python、Java）无缝集成。提供插件体系、规划器、记忆管理和 Prompt 模板引擎，是企业级 AI 应用开发的首选框架。",
-    "tags": ["AI Agent", "框架", "插件", "微软", "Skill"],
-    "author": "microsoft",
-    "addedAt": "2025-11-01"
+    "name": "Cursor Rules Collection",
+    "repoUrl": "https://github.com/PatrickJS/awesome-cursorrules",
+    "description": "精选 Cursor AI 编程规则集，帮助 AI 更好地理解项目架构、代码规范和最佳实践。",
+    "tags": ["Cursor", "编程规则", "代码规范"],
+    "author": "PatrickJS",
+    "addedAt": "2025-05-22"
   },
   {
     "id": "10",
-    "name": "LlamaIndex",
-    "repoUrl": "https://github.com/run-llama/llama_index",
-    "description": "领先的 LLM 数据框架，专注于将私有数据与大语言模型连接。提供 160+ 数据源连接器、高级索引和检索策略、查询引擎和 Agent 工具，是构建 RAG 应用的核心基础设施。",
-    "tags": ["RAG", "数据框架", "LLM", "检索", "索引"],
-    "author": "run-llama",
-    "addedAt": "2025-10-25"
+    "name": "Claude Code Custom Commands",
+    "repoUrl": "https://github.com/anthropics/claude-code",
+    "description": "Claude Code 自定义命令库，快速生成项目模板、代码审查、自动化测试等常用操作。",
+    "tags": ["Claude", "命令行", "自动化"],
+    "author": "Anthropic",
+    "addedAt": "2025-05-20"
   },
   {
     "id": "11",
-    "name": "Continue",
+    "name": "Continue.dev Plugins",
     "repoUrl": "https://github.com/continuedev/continue",
-    "description": "开源的 AI 代码助手，支持在 VS Code 和 JetBrains 中使用。可连接任意 LLM，提供代码补全、聊天、内联编辑和代码生成功能，支持自定义 Slash Commands 和 MCP 工具，是构建个性化 AI 编程体验的理想平台。",
-    "tags": ["代码生成", "IDE插件", "MCP", "Skill", "开源"],
+    "description": "Continue IDE 插件生态，扩展 AI 编程助手能力，支持自定义模型、上下文和工具。",
+    "tags": ["Continue", "IDE插件", "AI编程"],
     "author": "continuedev",
-    "addedAt": "2025-10-18"
+    "addedAt": "2025-05-18"
   },
   {
     "id": "12",
-    "name": "Aider",
+    "name": "Aider AI Pair Programming",
     "repoUrl": "https://github.com/paul-gauthier/aider",
-    "description": "终端中的 AI 结对编程工具，直接在 Git 仓库中工作。支持 GPT-4、Claude、DeepSeek 等模型，能理解整个代码库上下文并生成符合项目规范的代码，自动提交有意义的 Git 提交记录。",
-    "tags": ["代码生成", "AI Agent", "终端", "Git", "编程助手"],
+    "description": "终端 AI 结对编程工具，通过自定义 conventions 文件定义项目规范，让 AI 写出一致代码。",
+    "tags": ["Aider", "结对编程", "代码规范"],
     "author": "paul-gauthier",
-    "addedAt": "2025-10-10"
+    "addedAt": "2025-05-15"
   },
   {
     "id": "13",
-    "name": "DSPy",
-    "repoUrl": "https://github.com/stanfordnlp/dspy",
-    "description": "斯坦福大学开发的 Prompt 编程框架，将 Prompt 工程从手工调优转变为声明式编程。提供模块化的签名定义、自动优化器和编译器，能系统性地优化 Prompt 和模型权重，是 Prompt 工程学术研究的标杆项目。",
-    "tags": ["Prompt", "框架", "优化", "学术", "编程范式"],
-    "author": "stanfordnlp",
-    "addedAt": "2025-10-03"
+    "name": "Filesystem Bridge",
+    "repoUrl": "https://github.com/modelcontextprotocol/servers",
+    "description": "为 AI 助手提供安全的文件系统访问能力，支持读写文件、目录浏览、文件搜索等操作。",
+    "tags": ["MCP", "文件系统", "工具"],
+    "author": "Anthropic",
+    "addedAt": "2025-05-12"
   },
   {
     "id": "14",
-    "name": "OpenHands",
-    "repoUrl": "https://github.com/All-Hands-AI/OpenHands",
-    "description": "AI 驱动的软件开发代理平台（原 OpenDevin），支持 Agent 自主编写代码、执行命令、浏览网页和调用工具。提供沙箱执行环境、多模型支持和可扩展的 Agent 框架，适合构建端到端的自动化开发流程。",
-    "tags": ["AI Agent", "代码生成", "自动化", "开发平台"],
-    "author": "All-Hands-AI",
-    "addedAt": "2025-09-25"
+    "name": "Figma Design Assistant",
+    "repoUrl": "https://github.com/GLips/Figma-Context-MCP",
+    "description": "AI 直接读取 Figma 设计稿，自动生成代码实现，打通设计与开发之间的管道。",
+    "tags": ["MCP", "Figma", "设计转代码"],
+    "author": "GLips",
+    "addedAt": "2025-05-10"
   },
   {
     "id": "15",
-    "name": "Flowise",
-    "repoUrl": "https://github.com/FlowiseAI/Flowise",
-    "description": "拖拽式 LLM 工作流构建平台，提供可视化界面搭建 AI 应用。内置 LangChain 组件、RAG 管道、Agent 工具和 API 集成节点，无需编码即可创建聊天机器人、文档问答和自动化工作流。",
-    "tags": ["工作流", "低代码", "RAG", "可视化", "平台"],
-    "author": "FlowiseAI",
-    "addedAt": "2025-09-18"
+    "name": "Fetch Web Content",
+    "repoUrl": "https://github.com/modelcontextprotocol/servers",
+    "description": "将网页内容转换为 AI 可读的 Markdown 格式，让 AI 助手轻松获取和分析在线文档。",
+    "tags": ["MCP", "网页抓取", "Markdown"],
+    "author": "Anthropic",
+    "addedAt": "2025-05-08"
   },
   {
     "id": "16",
-    "name": "MetaGPT",
-    "repoUrl": "https://github.com/geekan/MetaGPT",
-    "description": "多 Agent 协作框架，模拟软件公司组织架构，将产品经理、架构师、工程师等角色赋予不同 Agent。能从一句话需求生成完整的 PRD、技术方案和代码，是 AI 软件开发自动化的前沿探索。",
-    "tags": ["AI Agent", "多Agent", "代码生成", "自动化", "软件开发"],
-    "author": "geekan",
-    "addedAt": "2025-09-10"
+    "name": "Notion AI Integration",
+    "repoUrl": "https://github.com/suekou/mcp-notion-server",
+    "description": "连接 Notion 工作空间，让 AI 助手管理页面、数据库、待办事项，实现智能工作流。",
+    "tags": ["MCP", "Notion", "工作流"],
+    "author": "suekou",
+    "addedAt": "2025-05-05"
   },
   {
     "id": "17",
-    "name": "awesome-chatgpt-prompts",
-    "repoUrl": "https://github.com/f/awesome-chatgpt-prompts",
-    "description": "ChatGPT Prompt 精选集合，收录了数百个高质量的角色扮演和任务导向 Prompt 模板。涵盖编程、写作、翻译、分析等场景，是 Prompt 工程入门和灵感获取的必看资源，推动了 Prompt 社区的繁荣。",
-    "tags": ["Prompt", "资源汇总", "ChatGPT", "模板", "社区"],
-    "author": "f",
-    "addedAt": "2025-09-02"
+    "name": "Excel Skill Pack",
+    "repoUrl": "https://github.com/haris-musa/excel-mcp-server",
+    "description": "AI 助手操作 Excel 文件，支持数据读写、公式计算、图表生成，办公效率倍增。",
+    "tags": ["MCP", "Excel", "办公"],
+    "author": "haris-musa",
+    "addedAt": "2025-05-03"
   },
   {
     "id": "18",
-    "name": "Promptflow",
-    "repoUrl": "https://github.com/microsoft/promptflow",
-    "description": "微软开源的 Prompt 工程开发工具集，提供可视化的 Prompt 编排、批量测试和评估流程。支持构建 LLM 应用逻辑、调试 Prompt 质量、集成评估指标和 CI/CD 部署，是 Prompt 工程走向工程化的重要工具。",
-    "tags": ["Prompt", "工作流", "评估", "微软", "工程化"],
-    "author": "microsoft",
-    "addedAt": "2025-08-25"
+    "name": "Docker Container Manager",
+    "repoUrl": "https://github.com/QuantGeekDev/docker-mcp",
+    "description": "AI 管理 Docker 容器和镜像，支持启动、停止、日志查看，DevOps 运维好帮手。",
+    "tags": ["MCP", "Docker", "运维"],
+    "author": "QuantGeekDev",
+    "addedAt": "2025-05-01"
   },
   {
     "id": "19",
-    "name": "FastGPT",
-    "repoUrl": "https://github.com/labring/FastGPT",
-    "description": "基于 LLM 的知识库问答平台，提供可视化的 Workflow 编排、多种 RAG 检索模式、对话管理和 API 集成。支持自定义 Prompt、多模型切换和知识库训练，适合快速搭建企业级智能客服和文档问答系统。",
-    "tags": ["RAG", "工作流", "知识库", "问答系统", "平台"],
-    "author": "labring",
-    "addedAt": "2025-08-18"
+    "name": "Prompt Engineering Guide",
+    "repoUrl": "https://github.com/dair-ai/Prompt-Engineering-Guide",
+    "description": "最全面的 Prompt 工程指南，包含各类提示词模板、技巧和最佳实践，提升 AI 输出质量。",
+    "tags": ["Prompt", "提示词", "学习"],
+    "author": "dair-ai",
+    "addedAt": "2025-04-28"
   },
   {
     "id": "20",
-    "name": "Open Interpreter",
-    "repoUrl": "https://github.com/OpenInterpreter/open-interpreter",
-    "description": "让 LLM 在本地运行代码的开源工具，支持 Python、JavaScript、Shell 等多种语言。AI 可以直接操作计算机的文件系统、浏览器和应用程序，是构建通用 AI Agent 的核心执行引擎。",
-    "tags": ["AI Agent", "代码执行", "工具集成", "本地部署"],
-    "author": "OpenInterpreter",
-    "addedAt": "2025-08-10"
+    "name": "Awesome ChatGPT Prompts",
+    "repoUrl": "https://github.com/f/awesome-chatgpt-prompts",
+    "description": "200+ 精心设计的 ChatGPT 提示词模板，涵盖写作、编程、分析、教育等各个领域。",
+    "tags": ["Prompt", "ChatGPT", "模板"],
+    "author": "f",
+    "addedAt": "2025-04-25"
   },
   {
     "id": "21",
-    "name": "LiteLLM",
-    "repoUrl": "https://github.com/BerriAI/litellm",
-    "description": "统一的 LLM API 网关，将 100+ 种大模型的接口统一为 OpenAI 格式调用。提供负载均衡、Fallback 策略、预算控制和用量追踪，是管理多模型 AI 应用的基础设施，简化了模型切换和供应商管理。",
-    "tags": ["LLM", "API网关", "工具集成", "基础设施"],
-    "author": "BerriAI",
-    "addedAt": "2025-08-02"
+    "name": "Slack Bot MCP",
+    "repoUrl": "https://github.com/modelcontextprotocol/servers",
+    "description": "AI 助手接入 Slack 工作区，发送消息、管理频道、搜索对话，实现智能团队协作。",
+    "tags": ["MCP", "Slack", "协作"],
+    "author": "Anthropic",
+    "addedAt": "2025-04-22"
   },
   {
     "id": "22",
-    "name": "Chroma",
-    "repoUrl": "https://github.com/chroma-core/chroma",
-    "description": "开源的 AI 原生嵌入式向量数据库，专为 RAG 应用设计。提供简洁的 Python/JS SDK，支持文档嵌入、相似度搜索和元数据过滤，是构建 LLM 应用记忆和知识检索层的轻量级首选方案。",
-    "tags": ["RAG", "向量数据库", "嵌入", "检索", "基础设施"],
-    "author": "chroma-core",
-    "addedAt": "2025-07-25"
+    "name": "Google Drive Bridge",
+    "repoUrl": "https://github.com/modelcontextprotocol/servers",
+    "description": "连接 Google Drive，让 AI 搜索、读取、创建云端文档，打通云存储与 AI 能力。",
+    "tags": ["MCP", "Google", "云存储"],
+    "author": "Anthropic",
+    "addedAt": "2025-04-20"
   },
   {
     "id": "23",
-    "name": "Vercel AI SDK",
-    "repoUrl": "https://github.com/vercel/ai",
-    "description": "Vercel 出品的 AI 应用开发工具包，提供 React/Next.js/Svelte 组件和 Server-side AI 流式接口。支持多模型统一调用、流式 UI 渲染、工具调用和 RAG 集成，是前端开发者构建 AI 应用的最佳入口。",
-    "tags": ["代码生成", "框架", "前端", "流式", "工具集成"],
-    "author": "vercel",
-    "addedAt": "2025-07-18"
+    "name": "Skills Zoom",
+    "repoUrl": "https://github.com/duguBoss/skills-zoom",
+    "description": "AI Skill 聚合分享平台，发现、收藏、分享最好用的 AI 技能和插件，让 AI 能力无限扩展。",
+    "tags": ["平台", "Skill", "社区"],
+    "author": "黑曜石科技工坊",
+    "addedAt": "2025-06-15"
   },
   {
     "id": "24",
-    "name": "ComfyUI",
-    "repoUrl": "https://github.com/comfyanonymous/ComfyUI",
-    "description": "基于节点的 AI 图像生成工作流引擎，通过可视化连线方式编排 Stable Diffusion 等模型。提供丰富的自定义节点生态、模型管理和工作流分享功能，是 AI 图像创作领域最强大的开源工具。",
-    "tags": ["工作流", "图像生成", "节点编辑", "可视化", "AI"],
-    "author": "comfyanonymous",
-    "addedAt": "2025-07-10"
+    "name": "Jina Reader API",
+    "repoUrl": "https://github.com/jina-ai/reader",
+    "description": "将任意 URL 转换为 AI 友好的 Markdown 内容，搜索网页时自动调用，获取高质量文本。",
+    "tags": ["搜索", "内容提取", "Markdown"],
+    "author": "jina-ai",
+    "addedAt": "2025-04-18"
   },
   {
     "id": "25",
-    "name": "skills-zoom",
-    "repoUrl": "https://github.com/duguBoss/skills-zoom",
-    "description": "AI Skill 聚合分享平台，支持标签筛选、批量导出项目地址。汇集各类 AI 助手技能和插件，为开发者提供一站式的 Skill 发现和管理体验。",
-    "tags": ["Skill", "工具平台", "社区", "Vue3"],
-    "author": "黑曜石科技工坊",
-    "addedAt": "2025-07-01"
+    "name": "Todoist Task Manager",
+    "repoUrl": "https://github.com/modelcontextprotocol/servers",
+    "description": "AI 管理 Todoist 任务列表，创建待办、设置提醒、整理项目，智能时间管理助手。",
+    "tags": ["MCP", "任务管理", "效率"],
+    "author": "Anthropic",
+    "addedAt": "2025-04-15"
   }
 ]

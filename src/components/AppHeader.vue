@@ -1,245 +1,203 @@
 <script setup lang="ts">
-import { RouterLink, useRoute, useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { computed, ref } from 'vue'
 import { useFavoritesStore } from '@/stores/favorites'
-import { HomeFilled, StarFilled, EditPen, Document, Close } from '@element-plus/icons-vue'
 
 const route = useRoute()
 const router = useRouter()
 const favoritesStore = useFavoritesStore()
-const activeIndex = computed(() => route.path)
-const mobileMenuOpen = ref(false)
+const showMobile = ref(false)
 
-function navigate(path: string) {
+const navItems = [
+  { path: '/', label: '发现', icon: '🏠' },
+  { path: '/favorites', label: '收藏', icon: '⭐', badge: () => favoritesStore.favoritesCount },
+  { path: '/submit-form', label: '投稿', icon: '📝' },
+  { path: '/submit', label: '说明', icon: '📋' },
+]
+
+function go(path: string) {
   router.push(path)
-  mobileMenuOpen.value = false
+  showMobile.value = false
 }
 </script>
 
 <template>
-  <header class="app-header">
+  <header class="header">
     <div class="header-inner">
-      <router-link to="/" class="brand">
-        <span class="brand-icon">⚡</span>
-        <span class="brand-title">Skills Zoom</span>
+      <router-link to="/" class="logo">
+        <span class="logo-icon">🔍</span>
+        <span class="logo-text">Skills Zoom</span>
       </router-link>
 
-      <nav class="nav-desktop">
-        <router-link to="/" :class="['nav-item', { active: activeIndex === '/' }]">
-          <el-icon><HomeFilled /></el-icon>
-          <span>发现</span>
-        </router-link>
-        <router-link to="/favorites" :class="['nav-item', { active: activeIndex === '/favorites' }]">
-          <el-icon><StarFilled /></el-icon>
-          <span>收藏</span>
-          <span v-if="favoritesStore.favoritesCount > 0" class="badge">{{ favoritesStore.favoritesCount }}</span>
-        </router-link>
-        <router-link to="/submit-form" :class="['nav-item', { active: activeIndex === '/submit-form' }]">
-          <el-icon><EditPen /></el-icon>
-          <span>投稿</span>
-        </router-link>
-        <router-link to="/submit" :class="['nav-item', { active: activeIndex === '/submit' }]">
-          <el-icon><Document /></el-icon>
-          <span>说明</span>
+      <nav class="nav">
+        <router-link
+          v-for="item in navItems"
+          :key="item.path"
+          :to="item.path"
+          :class="['nav-link', { active: route.path === item.path }]"
+        >
+          <span class="nav-icon">{{ item.icon }}</span>
+          <span>{{ item.label }}</span>
+          <span v-if="item.badge && item.badge() > 0" class="badge">{{ item.badge() }}</span>
         </router-link>
       </nav>
 
-      <button class="mobile-toggle" @click="mobileMenuOpen = !mobileMenuOpen">
-        <span :class="['hamburger', { open: mobileMenuOpen }]">
-          <span></span><span></span><span></span>
-        </span>
+      <button class="menu-btn" @click="showMobile = !showMobile">
+        <span :class="['menu-icon', { open: showMobile }]"></span>
       </button>
     </div>
 
-    <Transition name="slide">
-      <div v-if="mobileMenuOpen" class="mobile-menu">
-        <button class="mobile-close" @click="mobileMenuOpen = false">
-          <el-icon :size="20"><Close /></el-icon>
-        </button>
-        <div
-          :class="['mobile-nav-item', { active: activeIndex === '/' }]"
-          @click="navigate('/')"
-        >
-          <el-icon><HomeFilled /></el-icon><span>发现</span>
-        </div>
-        <div
-          :class="['mobile-nav-item', { active: activeIndex === '/favorites' }]"
-          @click="navigate('/favorites')"
-        >
-          <el-icon><StarFilled /></el-icon><span>收藏</span>
-          <span v-if="favoritesStore.favoritesCount > 0" class="badge">{{ favoritesStore.favoritesCount }}</span>
-        </div>
-        <div
-          :class="['mobile-nav-item', { active: activeIndex === '/submit-form' }]"
-          @click="navigate('/submit-form')"
-        >
-          <el-icon><EditPen /></el-icon><span>投稿</span>
-        </div>
-        <div
-          :class="['mobile-nav-item', { active: activeIndex === '/submit' }]"
-          @click="navigate('/submit')"
-        >
-          <el-icon><Document /></el-icon><span>说明</span>
-        </div>
+    <div v-if="showMobile" class="mobile-nav">
+      <div
+        v-for="item in navItems"
+        :key="item.path"
+        :class="['mobile-link', { active: route.path === item.path }]"
+        @click="go(item.path)"
+      >
+        <span>{{ item.icon }}</span>
+        <span>{{ item.label }}</span>
+        <span v-if="item.badge && item.badge() > 0" class="badge">{{ item.badge() }}</span>
       </div>
-    </Transition>
+    </div>
   </header>
 </template>
 
 <style scoped>
-.app-header {
+.header {
   position: sticky;
   top: 0;
-  z-index: 1000;
-  background: rgba(9, 9, 11, 0.8);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  z-index: 100;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid var(--sz-border);
 }
 .header-inner {
-  max-width: 1200px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 0 20px;
-  height: 60px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.brand {
+.logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  text-decoration: none;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1.05rem;
   color: var(--sz-text);
   flex-shrink: 0;
 }
-.brand-icon {
-  font-size: 22px;
+.logo-icon {
+  font-size: 1.2rem;
 }
-.brand-title {
-  font-size: 18px;
-  font-weight: 700;
-  background: var(--sz-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.3px;
-}
-.nav-desktop {
+.nav {
   display: flex;
   align-items: center;
   gap: 2px;
 }
-.nav-item {
+.nav-link {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 14px;
-  border-radius: var(--sz-radius-sm);
-  color: var(--sz-text-secondary);
-  text-decoration: none;
-  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.88rem;
   font-weight: 500;
-  transition: all 0.2s;
-  position: relative;
+  color: var(--sz-text-secondary);
+  transition: all var(--sz-transition);
 }
-.nav-item:hover {
+.nav-link:hover {
   color: var(--sz-text);
-  background: var(--sz-bg-card);
+  background: var(--sz-bg-hover);
 }
-.nav-item.active {
-  color: var(--sz-primary-light);
-  background: rgba(124, 58, 237, 0.1);
+.nav-link.active {
+  color: var(--sz-primary);
+  background: var(--sz-primary-bg);
+}
+.nav-icon {
+  font-size: 0.9rem;
 }
 .badge {
   background: var(--sz-primary);
   color: #fff;
-  font-size: 11px;
+  font-size: 0.68rem;
   font-weight: 600;
-  padding: 1px 7px;
+  padding: 1px 6px;
   border-radius: 10px;
   line-height: 1.5;
 }
-.mobile-toggle {
+.menu-btn {
   display: none;
   background: none;
   border: none;
-  cursor: pointer;
   padding: 8px;
 }
-.hamburger {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 22px;
-}
-.hamburger span {
+.menu-icon {
   display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--sz-text-secondary);
+  border-radius: 1px;
+  position: relative;
+  transition: all 0.3s;
+}
+.menu-icon::before,
+.menu-icon::after {
+  content: '';
+  position: absolute;
+  width: 20px;
   height: 2px;
   background: var(--sz-text-secondary);
   border-radius: 1px;
   transition: all 0.3s;
 }
-.hamburger.open span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+.menu-icon::before { top: -6px; }
+.menu-icon::after { top: 6px; }
+.menu-icon.open {
+  background: transparent;
 }
-.hamburger.open span:nth-child(2) {
-  opacity: 0;
+.menu-icon.open::before {
+  top: 0;
+  transform: rotate(45deg);
 }
-.hamburger.open span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
+.menu-icon.open::after {
+  top: 0;
+  transform: rotate(-45deg);
 }
-.mobile-menu {
-  padding: 16px 20px 24px;
+.mobile-nav {
   border-top: 1px solid var(--sz-border);
-  position: relative;
+  padding: 8px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
-.mobile-close {
-  position: absolute;
-  top: 12px;
-  right: 20px;
-  background: none;
-  border: none;
-  color: var(--sz-text-secondary);
-  cursor: pointer;
-  padding: 4px;
-}
-.mobile-nav-item {
+.mobile-link {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  border-radius: var(--sz-radius-sm);
-  color: var(--sz-text-secondary);
-  font-size: 15px;
+  gap: 10px;
+  padding: 12px 12px;
+  border-radius: 8px;
+  font-size: 0.95rem;
   font-weight: 500;
+  color: var(--sz-text-secondary);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all var(--sz-transition);
 }
-.mobile-nav-item:hover,
-.mobile-nav-item.active {
-  color: var(--sz-primary-light);
-  background: rgba(124, 58, 237, 0.1);
-}
-.slide-enter-active,
-.slide-leave-active {
-  transition: all 0.3s ease;
-}
-.slide-enter-from,
-.slide-leave-to {
-  opacity: 0;
-  transform: translateY(-8px);
+.mobile-link:hover,
+.mobile-link.active {
+  color: var(--sz-primary);
+  background: var(--sz-primary-bg);
 }
 
 @media (max-width: 768px) {
-  .nav-desktop {
+  .nav {
     display: none;
   }
-  .mobile-toggle {
+  .menu-btn {
     display: block;
-  }
-  .brand-title {
-    font-size: 16px;
   }
 }
 </style>
