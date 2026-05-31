@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useSkillsStore } from '@/stores/skills'
 import { useFavoritesStore } from '@/stores/favorites'
-import { ArrowLeft, Link, User, Calendar, Star, StarFilled, CollectionTag } from '@element-plus/icons-vue'
+import { ArrowLeft, Link, Star, StarFilled } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 
 const route = useRoute()
@@ -43,156 +43,222 @@ function handleTagClick(tag: string) {
 
 <template>
   <div class="detail-view">
-    <el-button
-      link
-      type="primary"
-      :icon="ArrowLeft"
-      @click="goBack"
-      class="back-btn"
-    >
-      返回列表
-    </el-button>
+    <button class="back-btn" @click="goBack">
+      <el-icon><ArrowLeft /></el-icon> 返回
+    </button>
 
-    <el-empty v-if="!skill" description="Skill 不存在" />
+    <div v-if="!skill" class="empty-state">
+      <div class="empty-icon">😕</div>
+      <p>Skill 不存在</p>
+    </div>
 
     <template v-else>
-      <el-card class="detail-card" shadow="never">
-        <div class="detail-header">
-          <div class="title-section">
-            <h1 class="skill-title">{{ skill.name }}</h1>
-            <div class="actions">
-              <el-button
-                :type="isFavorited ? 'warning' : 'default'"
-                :icon="isFavorited ? StarFilled : Star"
-                @click="toggleFavorite"
-              >
-                {{ isFavorited ? '已收藏' : '收藏' }}
-              </el-button>
-              <el-button type="primary" :icon="Link" @click="openRepo">
-                访问仓库
-              </el-button>
-            </div>
-          </div>
-
-          <p class="detail-description">{{ skill.description }}</p>
-
-          <div class="detail-meta">
-            <el-tag size="large" effect="plain">
-              <el-icon><User /></el-icon>
-              {{ skill.author }}
-            </el-tag>
-            <el-tag size="large" effect="plain">
-              <el-icon><Calendar /></el-icon>
-              添加于 {{ skill.addedAt }}
-            </el-tag>
+      <div class="detail-card">
+        <div class="detail-top">
+          <h1 class="detail-title">{{ skill.name }}</h1>
+          <div class="detail-actions">
+            <button
+              :class="['fav-action', { active: isFavorited }]"
+              @click="toggleFavorite"
+            >
+              <el-icon><component :is="isFavorited ? StarFilled : Star" /></el-icon>
+              {{ isFavorited ? '已收藏' : '收藏' }}
+            </button>
+            <button class="repo-action" @click="openRepo">
+              <el-icon><Link /></el-icon>
+              访问仓库
+            </button>
           </div>
         </div>
 
-        <el-divider />
+        <p class="detail-desc">{{ skill.description }}</p>
+
+        <div class="detail-meta">
+          <span class="meta-item">👤 {{ skill.author }}</span>
+          <span class="meta-item">📅 {{ skill.addedAt }}</span>
+        </div>
+
+        <div class="divider"></div>
 
         <div class="detail-section">
-          <h3>
-            <el-icon><CollectionTag /></el-icon>
-            标签分类
-          </h3>
+          <h3 class="section-title">标签分类</h3>
           <div class="tags-row">
-            <el-tag
+            <span
               v-for="tag in skill.tags"
               :key="tag"
-              size="large"
-              type="primary"
-              effect="plain"
               class="detail-tag"
               @click="handleTagClick(tag)"
             >
               {{ tag }}
-            </el-tag>
+            </span>
           </div>
         </div>
 
-        <el-divider />
+        <div class="divider"></div>
 
         <div class="detail-section">
-          <h3>项目链接</h3>
-          <el-link
-            type="primary"
-            :href="skill.repoUrl"
-            target="_blank"
-            :icon="Link"
-            class="repo-link"
-          >
+          <h3 class="section-title">项目链接</h3>
+          <a :href="skill.repoUrl" target="_blank" class="repo-link">
+            <el-icon><Link /></el-icon>
             {{ skill.repoUrl }}
-          </el-link>
+          </a>
         </div>
-      </el-card>
+      </div>
     </template>
   </div>
 </template>
 
 <style scoped>
 .detail-view {
-  padding-bottom: 40px;
+  padding-bottom: 60px;
 }
 .back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--sz-border);
+  color: var(--sz-text-secondary);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  margin-bottom: 24px;
+  transition: all 0.2s;
+}
+.back-btn:hover {
+  color: var(--sz-primary-light);
+  border-color: var(--sz-primary);
+}
+.empty-state {
+  text-align: center;
+  padding: 60px 0;
+  color: var(--sz-text-secondary);
+}
+.empty-icon {
+  font-size: 48px;
   margin-bottom: 16px;
 }
 .detail-card {
-  margin-top: 8px;
+  background: var(--sz-bg-card);
+  border: 1px solid var(--sz-border);
+  border-radius: 16px;
+  padding: 32px;
 }
-.detail-header {
-  margin-bottom: 8px;
-}
-.title-section {
+.detail-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
-.skill-title {
+.detail-title {
   margin: 0;
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--el-text-color-primary);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--sz-text);
+  line-height: 1.3;
 }
-.actions {
+.detail-actions {
   display: flex;
   gap: 10px;
 }
-.detail-description {
-  margin: 0 0 20px 0;
-  font-size: 16px;
-  color: var(--el-text-color-regular);
+.fav-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--sz-border);
+  background: var(--sz-bg-card);
+  color: var(--sz-text-secondary);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+.fav-action:hover {
+  border-color: #f1c40f;
+  color: #f1c40f;
+}
+.fav-action.active {
+  border-color: #f1c40f;
+  color: #f1c40f;
+  background: rgba(241, 196, 15, 0.1);
+}
+.repo-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  background: var(--sz-primary);
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+.repo-action:hover {
+  background: var(--sz-primary-light);
+}
+.detail-desc {
+  margin: 0 0 20px;
+  font-size: 15px;
+  color: var(--sz-text-secondary);
   line-height: 1.7;
 }
 .detail-meta {
   display: flex;
-  gap: 12px;
+  gap: 20px;
   flex-wrap: wrap;
 }
-.detail-section h3 {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0 0 16px 0;
-  font-size: 16px;
-  color: var(--el-text-color-primary);
+.meta-item {
+  font-size: 13px;
+  color: var(--sz-text-secondary);
+}
+.divider {
+  height: 1px;
+  background: var(--sz-border);
+  margin: 24px 0;
+}
+.section-title {
+  margin: 0 0 16px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--sz-text);
 }
 .tags-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 .detail-tag {
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: rgba(108, 92, 231, 0.1);
+  color: var(--sz-primary-light);
+  border: 1px solid rgba(108, 92, 231, 0.2);
+  font-size: 13px;
   cursor: pointer;
   transition: all 0.2s;
 }
 .detail-tag:hover {
-  transform: translateY(-1px);
+  background: var(--sz-primary);
+  color: #fff;
+  border-color: var(--sz-primary);
 }
 .repo-link {
-  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--sz-primary-light);
+  font-size: 14px;
+  text-decoration: none;
   word-break: break-all;
+  transition: color 0.2s;
+}
+.repo-link:hover {
+  color: var(--sz-accent);
 }
 </style>
