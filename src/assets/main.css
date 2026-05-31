@@ -1,30 +1,40 @@
 :root {
-  --sz-bg: #f8f9fa;
-  --sz-bg-card: #ffffff;
-  --sz-bg-hover: #f1f3f5;
-  --sz-bg-surface: #ffffff;
-  --sz-bg-muted: #e9ecef;
-  --sz-text: #212529;
-  --sz-text-secondary: #6c757d;
-  --sz-text-muted: #adb5bd;
-  --sz-border: #e9ecef;
-  --sz-border-light: #f1f3f5;
-  --sz-primary: #4263eb;
-  --sz-primary-light: #748ffc;
-  --sz-primary-bg: #edf2ff;
-  --sz-accent: #0ca678;
-  --sz-accent-bg: #e6fcf5;
-  --sz-warning: #f59f00;
-  --sz-warning-bg: #fff9db;
-  --sz-danger: #e03131;
-  --sz-radius: 10px;
-  --sz-radius-lg: 14px;
-  --sz-radius-full: 9999px;
-  --sz-shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
-  --sz-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --sz-shadow-md: 0 4px 12px rgba(0,0,0,0.06);
-  --sz-shadow-lg: 0 12px 32px rgba(0,0,0,0.08);
-  --sz-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --c-bg: #f5f3ff;
+  --c-bg-alt: #ede9fe;
+  --c-surface: #ffffff;
+  --c-surface-hover: #f8f7ff;
+  --c-primary: #6366f1;
+  --c-primary-dark: #4f46e5;
+  --c-primary-light: #a5b4fc;
+  --c-primary-bg: #eef2ff;
+  --c-accent: #06b6d4;
+  --c-accent-bg: #ecfeff;
+  --c-amber: #f59e0b;
+  --c-amber-bg: #fffbeb;
+  --c-emerald: #10b981;
+  --c-emerald-bg: #ecfdf5;
+  --c-rose: #f43f5e;
+  --c-rose-bg: #fff1f2;
+  --c-text: #1e293b;
+  --c-text-secondary: #64748b;
+  --c-text-muted: #94a3b8;
+  --c-border: #e2e8f0;
+  --c-border-light: #f1f5f9;
+  --c-shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --c-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.03);
+  --c-shadow-md: 0 4px 16px rgba(0,0,0,0.07);
+  --c-shadow-lg: 0 12px 40px rgba(0,0,0,0.09);
+  --c-shadow-xl: 0 20px 60px rgba(0,0,0,0.12);
+  --radius: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI',
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue',
+    Helvetica, Arial, sans-serif;
 }
 
 *,
@@ -41,15 +51,17 @@ html {
 }
 
 body {
-  background-color: var(--sz-bg);
-  color: var(--sz-text);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI',
-    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue',
-    Helvetica, Arial, sans-serif;
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
   overflow-x: hidden;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99,102,241,0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 90% 80%, rgba(6,182,212,0.05), transparent);
+  background-attachment: fixed;
 }
 
 a {
@@ -60,6 +72,8 @@ a {
 button {
   font-family: inherit;
   cursor: pointer;
+  border: none;
+  background: none;
 }
 
 input, textarea {
@@ -70,22 +84,18 @@ input, textarea {
   width: 5px;
   height: 5px;
 }
-
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #d0d5dd;
+  background: #cbd5e1;
   border-radius: 3px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: #a0a5ad;
+  background: #94a3b8;
 }
-
 ::selection {
-  background-color: var(--sz-primary);
+  background-color: var(--c-primary);
   color: #fff;
 }
 

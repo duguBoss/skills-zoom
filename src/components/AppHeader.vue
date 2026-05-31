@@ -9,10 +9,9 @@ const favoritesStore = useFavoritesStore()
 const showMobile = ref(false)
 
 const navItems = [
-  { path: '/', label: '发现', icon: '🏠' },
-  { path: '/favorites', label: '收藏', icon: '⭐', badge: () => favoritesStore.favoritesCount },
-  { path: '/submit-form', label: '投稿', icon: '📝' },
-  { path: '/submit', label: '说明', icon: '📋' },
+  { path: '/', label: '发现' },
+  { path: '/favorites', label: '收藏', count: () => favoritesStore.favoritesCount },
+  { path: '/submit-form', label: '投稿' },
 ]
 
 function go(path: string) {
@@ -24,9 +23,16 @@ function go(path: string) {
 <template>
   <header class="header">
     <div class="header-inner">
-      <router-link to="/" class="logo">
-        <span class="logo-icon">🔍</span>
-        <span class="logo-text">Skills Zoom</span>
+      <router-link to="/" class="logo" @click="showMobile = false">
+        <div class="logo-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            <line x1="11" y1="8" x2="11" y2="14"/>
+            <line x1="8" y1="11" x2="14" y2="11"/>
+          </svg>
+        </div>
+        <span class="logo-text">Skills<span class="logo-accent">Zoom</span></span>
       </router-link>
 
       <nav class="nav">
@@ -36,29 +42,31 @@ function go(path: string) {
           :to="item.path"
           :class="['nav-link', { active: route.path === item.path }]"
         >
-          <span class="nav-icon">{{ item.icon }}</span>
-          <span>{{ item.label }}</span>
-          <span v-if="item.badge && item.badge() > 0" class="badge">{{ item.badge() }}</span>
+          {{ item.label }}
+          <span v-if="item.count && item.count() > 0" class="badge">{{ item.count() }}</span>
         </router-link>
       </nav>
 
-      <button class="menu-btn" @click="showMobile = !showMobile">
-        <span :class="['menu-icon', { open: showMobile }]"></span>
+      <button class="menu-btn" @click="showMobile = !showMobile" :aria-label="showMobile ? '关闭菜单' : '打开菜单'">
+        <span :class="['bar', { open: showMobile }]"></span>
+        <span :class="['bar', { open: showMobile }]"></span>
+        <span :class="['bar', { open: showMobile }]"></span>
       </button>
     </div>
 
-    <div v-if="showMobile" class="mobile-nav">
-      <div
-        v-for="item in navItems"
-        :key="item.path"
-        :class="['mobile-link', { active: route.path === item.path }]"
-        @click="go(item.path)"
-      >
-        <span>{{ item.icon }}</span>
-        <span>{{ item.label }}</span>
-        <span v-if="item.badge && item.badge() > 0" class="badge">{{ item.badge() }}</span>
+    <transition name="slide">
+      <div v-if="showMobile" class="mobile-nav">
+        <div
+          v-for="item in navItems"
+          :key="item.path"
+          :class="['mobile-link', { active: route.path === item.path }]"
+          @click="go(item.path)"
+        >
+          {{ item.label }}
+          <span v-if="item.count && item.count() > 0" class="badge">{{ item.count() }}</span>
+        </div>
       </div>
-    </div>
+    </transition>
   </header>
 </template>
 
@@ -67,16 +75,16 @@ function go(path: string) {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: saturate(180%) blur(12px);
-  -webkit-backdrop-filter: saturate(180%) blur(12px);
-  border-bottom: 1px solid var(--sz-border);
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--c-border);
 }
 .header-inner {
-  max-width: 1120px;
+  max-width: 1160px;
   margin: 0 auto;
-  padding: 0 20px;
-  height: 56px;
+  padding: 0 24px;
+  height: 58px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -84,120 +92,140 @@ function go(path: string) {
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--sz-text);
+  gap: 9px;
   flex-shrink: 0;
 }
-.logo-icon {
-  font-size: 1.2rem;
+.logo-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.logo-text {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--c-text);
+  letter-spacing: -0.3px;
+}
+.logo-accent {
+  color: var(--c-primary);
 }
 .nav {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
 }
 .nav-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
+  padding: 7px 14px;
   border-radius: 8px;
-  font-size: 0.88rem;
+  font-size: 0.87rem;
   font-weight: 500;
-  color: var(--sz-text-secondary);
-  transition: all var(--sz-transition);
+  color: var(--c-text-secondary);
+  transition: all var(--transition);
 }
 .nav-link:hover {
-  color: var(--sz-text);
-  background: var(--sz-bg-hover);
+  color: var(--c-text);
+  background: var(--c-primary-bg);
 }
 .nav-link.active {
-  color: var(--sz-primary);
-  background: var(--sz-primary-bg);
-}
-.nav-icon {
-  font-size: 0.9rem;
+  color: var(--c-primary);
+  background: var(--c-primary-bg);
 }
 .badge {
-  background: var(--sz-primary);
+  background: var(--c-primary);
   color: #fff;
-  font-size: 0.68rem;
-  font-weight: 600;
-  padding: 1px 6px;
-  border-radius: 10px;
-  line-height: 1.5;
+  font-size: 0.66rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
+
 .menu-btn {
   display: none;
-  background: none;
-  border: none;
+  flex-direction: column;
+  gap: 5px;
   padding: 8px;
 }
-.menu-icon {
+.bar {
   display: block;
-  width: 20px;
+  width: 22px;
   height: 2px;
-  background: var(--sz-text-secondary);
-  border-radius: 1px;
-  position: relative;
-  transition: all 0.3s;
+  background: var(--c-text-secondary);
+  border-radius: 2px;
+  transition: all var(--transition);
 }
-.menu-icon::before,
-.menu-icon::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 2px;
-  background: var(--sz-text-secondary);
-  border-radius: 1px;
-  transition: all 0.3s;
+.bar.open:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
 }
-.menu-icon::before { top: -6px; }
-.menu-icon::after { top: 6px; }
-.menu-icon.open {
-  background: transparent;
+.bar.open:nth-child(2) {
+  opacity: 0;
 }
-.menu-icon.open::before {
-  top: 0;
-  transform: rotate(45deg);
+.bar.open:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
-.menu-icon.open::after {
-  top: 0;
-  transform: rotate(-45deg);
-}
+
 .mobile-nav {
-  border-top: 1px solid var(--sz-border);
-  padding: 8px 20px 16px;
+  border-top: 1px solid var(--c-border);
+  padding: 8px 24px 16px;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  background: var(--c-surface);
 }
 .mobile-link {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 12px;
-  border-radius: 8px;
+  gap: 8px;
+  padding: 13px 14px;
+  border-radius: 10px;
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--sz-text-secondary);
+  color: var(--c-text-secondary);
   cursor: pointer;
-  transition: all var(--sz-transition);
+  transition: all var(--transition);
 }
 .mobile-link:hover,
 .mobile-link.active {
-  color: var(--sz-primary);
-  background: var(--sz-primary-bg);
+  color: var(--c-primary);
+  background: var(--c-primary-bg);
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.22s ease;
+}
+.slide-enter-from,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
 }
 
 @media (max-width: 768px) {
+  .header-inner {
+    padding: 0 14px;
+    height: 54px;
+  }
   .nav {
     display: none;
   }
   .menu-btn {
-    display: block;
+    display: flex;
+  }
+  .mobile-nav {
+    padding: 6px 14px 14px;
   }
 }
 </style>
