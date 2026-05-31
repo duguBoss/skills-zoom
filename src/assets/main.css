@@ -1,37 +1,63 @@
 :root {
-  --sz-primary: #6c5ce7;
-  --sz-primary-light: #a29bfe;
-  --sz-accent: #00cec9;
-  --sz-bg: #0a0a0f;
-  --sz-bg-card: #16161e;
-  --sz-bg-card-hover: #1e1e2a;
-  --sz-bg-surface: #12121a;
-  --sz-text: #e8e8ed;
-  --sz-text-secondary: #8b8b9e;
-  --sz-border: #2a2a3a;
-  --sz-gradient: linear-gradient(135deg, #6c5ce7, #00cec9);
+  --sz-primary: #7c3aed;
+  --sz-primary-light: #a78bfa;
+  --sz-primary-dark: #5b21b6;
+  --sz-accent: #06b6d4;
+  --sz-accent-light: #67e8f9;
+  --sz-bg: #09090b;
+  --sz-bg-card: #18181b;
+  --sz-bg-card-hover: #1f1f23;
+  --sz-bg-surface: #0f0f12;
+  --sz-bg-elevated: #27272a;
+  --sz-text: #fafafa;
+  --sz-text-secondary: #a1a1aa;
+  --sz-text-muted: #71717a;
+  --sz-border: #27272a;
+  --sz-border-light: #3f3f46;
+  --sz-gradient: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+  --sz-gradient-subtle: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(6,182,212,0.15) 100%);
+  --sz-radius-sm: 8px;
+  --sz-radius-md: 12px;
+  --sz-radius-lg: 16px;
+  --sz-radius-xl: 24px;
+  --sz-shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --sz-shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  --sz-shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+  --sz-shadow-glow: 0 0 20px rgba(124,58,237,0.15);
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  margin: 0;
-  padding: 0;
   background-color: var(--sz-bg);
   color: var(--sz-text);
-  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI',
+    'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+button {
+  font-family: inherit;
 }
 
 ::-webkit-scrollbar {
@@ -40,19 +66,25 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--sz-bg-surface);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--sz-primary);
+  background: var(--sz-border-light);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--sz-primary-light);
+  background: var(--sz-primary);
 }
 
 ::selection {
   background-color: var(--sz-primary);
   color: #fff;
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px;
+  }
 }

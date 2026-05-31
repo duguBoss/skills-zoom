@@ -42,12 +42,12 @@ function handleTagClick(tag: string) {
 </script>
 
 <template>
-  <div class="detail-view">
+  <div class="detail">
     <button class="back-btn" @click="goBack">
       <el-icon><ArrowLeft /></el-icon> 返回
     </button>
 
-    <div v-if="!skill" class="empty-state">
+    <div v-if="!skill" class="empty">
       <div class="empty-icon">😕</div>
       <p>Skill 不存在</p>
     </div>
@@ -57,16 +57,12 @@ function handleTagClick(tag: string) {
         <div class="detail-top">
           <h1 class="detail-title">{{ skill.name }}</h1>
           <div class="detail-actions">
-            <button
-              :class="['fav-action', { active: isFavorited }]"
-              @click="toggleFavorite"
-            >
+            <button :class="['fav-btn', { on: isFavorited }]" @click="toggleFavorite">
               <el-icon><component :is="isFavorited ? StarFilled : Star" /></el-icon>
               {{ isFavorited ? '已收藏' : '收藏' }}
             </button>
-            <button class="repo-action" @click="openRepo">
-              <el-icon><Link /></el-icon>
-              访问仓库
+            <button class="repo-btn" @click="openRepo">
+              <el-icon><Link /></el-icon> 访问仓库
             </button>
           </div>
         </div>
@@ -74,29 +70,22 @@ function handleTagClick(tag: string) {
         <p class="detail-desc">{{ skill.description }}</p>
 
         <div class="detail-meta">
-          <span class="meta-item">👤 {{ skill.author }}</span>
-          <span class="meta-item">📅 {{ skill.addedAt }}</span>
+          <span class="meta">👤 {{ skill.author }}</span>
+          <span class="meta">📅 {{ skill.addedAt }}</span>
         </div>
 
         <div class="divider"></div>
 
-        <div class="detail-section">
+        <div class="section">
           <h3 class="section-title">标签分类</h3>
-          <div class="tags-row">
-            <span
-              v-for="tag in skill.tags"
-              :key="tag"
-              class="detail-tag"
-              @click="handleTagClick(tag)"
-            >
-              {{ tag }}
-            </span>
+          <div class="tags">
+            <span v-for="tag in skill.tags" :key="tag" class="tag" @click="handleTagClick(tag)">{{ tag }}</span>
           </div>
         </div>
 
         <div class="divider"></div>
 
-        <div class="detail-section">
+        <div class="section">
           <h3 class="section-title">项目链接</h3>
           <a :href="skill.repoUrl" target="_blank" class="repo-link">
             <el-icon><Link /></el-icon>
@@ -109,41 +98,41 @@ function handleTagClick(tag: string) {
 </template>
 
 <style scoped>
-.detail-view {
+.detail {
   padding-bottom: 60px;
 }
 .back-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
   background: none;
   border: 1px solid var(--sz-border);
   color: var(--sz-text-secondary);
   padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: var(--sz-radius-sm);
   cursor: pointer;
   font-size: 13px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   transition: all 0.2s;
 }
 .back-btn:hover {
   color: var(--sz-primary-light);
   border-color: var(--sz-primary);
 }
-.empty-state {
+.empty {
   text-align: center;
   padding: 60px 0;
-  color: var(--sz-text-secondary);
+  color: var(--sz-text-muted);
 }
 .empty-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
+  font-size: 40px;
+  margin-bottom: 12px;
 }
 .detail-card {
   background: var(--sz-bg-card);
   border: 1px solid var(--sz-border);
-  border-radius: 16px;
-  padding: 32px;
+  border-radius: var(--sz-radius-lg);
+  padding: 28px;
 }
 .detail-top {
   display: flex;
@@ -151,25 +140,27 @@ function handleTagClick(tag: string) {
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 .detail-title {
   margin: 0;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 800;
   color: var(--sz-text);
   line-height: 1.3;
+  flex: 1;
 }
 .detail-actions {
   display: flex;
-  gap: 10px;
+  gap: 8px;
+  flex-shrink: 0;
 }
-.fav-action {
-  display: flex;
+.fav-btn {
+  display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 18px;
-  border-radius: 8px;
+  padding: 8px 16px;
+  border-radius: var(--sz-radius-sm);
   border: 1px solid var(--sz-border);
   background: var(--sz-bg-card);
   color: var(--sz-text-secondary);
@@ -177,21 +168,21 @@ function handleTagClick(tag: string) {
   font-size: 13px;
   transition: all 0.2s;
 }
-.fav-action:hover {
-  border-color: #f1c40f;
-  color: #f1c40f;
+.fav-btn:hover {
+  border-color: #fbbf24;
+  color: #fbbf24;
 }
-.fav-action.active {
-  border-color: #f1c40f;
-  color: #f1c40f;
-  background: rgba(241, 196, 15, 0.1);
+.fav-btn.on {
+  border-color: #fbbf24;
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.08);
 }
-.repo-action {
-  display: flex;
+.repo-btn {
+  display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 18px;
-  border-radius: 8px;
+  padding: 8px 16px;
+  border-radius: var(--sz-radius-sm);
   border: none;
   background: var(--sz-primary);
   color: #fff;
@@ -199,51 +190,51 @@ function handleTagClick(tag: string) {
   font-size: 13px;
   transition: all 0.2s;
 }
-.repo-action:hover {
+.repo-btn:hover {
   background: var(--sz-primary-light);
 }
 .detail-desc {
-  margin: 0 0 20px;
+  margin: 0 0 16px;
   font-size: 15px;
   color: var(--sz-text-secondary);
   line-height: 1.7;
 }
 .detail-meta {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   flex-wrap: wrap;
 }
-.meta-item {
+.meta {
   font-size: 13px;
-  color: var(--sz-text-secondary);
+  color: var(--sz-text-muted);
 }
 .divider {
   height: 1px;
   background: var(--sz-border);
-  margin: 24px 0;
+  margin: 20px 0;
 }
 .section-title {
-  margin: 0 0 16px;
-  font-size: 15px;
+  margin: 0 0 12px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--sz-text);
 }
-.tags-row {
+.tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
-.detail-tag {
-  padding: 6px 16px;
+.tag {
+  padding: 5px 14px;
   border-radius: 20px;
-  background: rgba(108, 92, 231, 0.1);
+  background: rgba(124, 58, 237, 0.08);
   color: var(--sz-primary-light);
-  border: 1px solid rgba(108, 92, 231, 0.2);
+  border: 1px solid rgba(124, 58, 237, 0.15);
   font-size: 13px;
   cursor: pointer;
   transition: all 0.2s;
 }
-.detail-tag:hover {
+.tag:hover {
   background: var(--sz-primary);
   color: #fff;
   border-color: var(--sz-primary);
@@ -251,14 +242,33 @@ function handleTagClick(tag: string) {
 .repo-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   color: var(--sz-primary-light);
   font-size: 14px;
-  text-decoration: none;
   word-break: break-all;
   transition: color 0.2s;
 }
 .repo-link:hover {
   color: var(--sz-accent);
+}
+
+@media (max-width: 768px) {
+  .detail-card {
+    padding: 18px;
+    border-radius: var(--sz-radius-md);
+  }
+  .detail-title {
+    font-size: 20px;
+  }
+  .detail-top {
+    flex-direction: column;
+  }
+  .detail-actions {
+    width: 100%;
+  }
+  .fav-btn, .repo-btn {
+    flex: 1;
+    justify-content: center;
+  }
 }
 </style>

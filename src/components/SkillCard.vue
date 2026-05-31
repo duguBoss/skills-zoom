@@ -37,50 +37,50 @@ function toggleFavorite(e: Event) {
 
 <template>
   <div
-    :class="['skill-card', { 'is-selected': isSelected }]"
+    :class="['skill-card', { selected: isSelected }]"
     @click="toggleSelect"
   >
-    <div class="card-top">
-      <div class="card-name">{{ skill.name }}</div>
-      <button
-        class="fav-btn"
-        :class="{ active: isFavorited }"
-        @click.stop="toggleFavorite"
-        :title="isFavorited ? '取消收藏' : '收藏'"
-      >
-        <el-icon :size="16"><component :is="isFavorited ? StarFilled : Star" /></el-icon>
-      </button>
-    </div>
+    <div class="card-accent"></div>
 
-    <p class="card-desc">{{ skill.description }}</p>
-
-    <div class="card-tags">
-      <span
-        v-for="tag in skill.tags"
-        :key="tag"
-        class="tag"
-        :class="{ highlight: store.selectedTags.includes(tag) }"
-        @click.stop="store.toggleTag(tag)"
-      >
-        {{ tag }}
-      </span>
-    </div>
-
-    <div class="card-bottom">
-      <span class="card-author">{{ skill.author }}</span>
-      <div class="card-actions">
-        <button class="action-btn" @click.stop="goDetail" title="查看详情">
-          <el-icon :size="14"><View /></el-icon>
+    <div class="card-body">
+      <div class="card-head">
+        <h3 class="card-name">{{ skill.name }}</h3>
+        <button
+          :class="['star-btn', { on: isFavorited }]"
+          @click.stop="toggleFavorite"
+        >
+          <el-icon :size="15"><component :is="isFavorited ? StarFilled : Star" /></el-icon>
         </button>
-        <button class="action-btn" @click.stop="openRepo" title="访问仓库">
-          <el-icon :size="14"><Link /></el-icon>
-        </button>
+      </div>
+
+      <p class="card-desc">{{ skill.description }}</p>
+
+      <div class="card-tags">
+        <span
+          v-for="tag in skill.tags.slice(0, 3)"
+          :key="tag"
+          :class="['tag', { active: store.selectedTags.includes(tag) }]"
+          @click.stop="store.toggleTag(tag)"
+        >{{ tag }}</span>
+        <span v-if="skill.tags.length > 3" class="tag more">+{{ skill.tags.length - 3 }}</span>
+      </div>
+
+      <div class="card-foot">
+        <span class="author">{{ skill.author }}</span>
+        <div class="actions">
+          <button class="icon-btn" @click.stop="goDetail" title="详情">
+            <el-icon :size="13"><View /></el-icon>
+          </button>
+          <button class="icon-btn" @click.stop="openRepo" title="仓库">
+            <el-icon :size="13"><Link /></el-icon>
+          </button>
+        </div>
       </div>
     </div>
 
-    <div v-if="isSelected" class="selected-indicator">
-      <span class="check-mark">✓</span>
-    </div>
+    <Transition name="check">
+      <div v-if="isSelected" class="check-badge">✓</div>
+    </Transition>
   </div>
 </template>
 
@@ -89,71 +89,68 @@ function toggleFavorite(e: Event) {
   position: relative;
   background: var(--sz-bg-card);
   border: 1px solid var(--sz-border);
-  border-radius: 12px;
-  padding: 20px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  border-radius: var(--sz-radius-md);
   overflow: hidden;
-}
-.skill-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--sz-gradient);
-  opacity: 0;
-  transition: opacity 0.25s;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .skill-card:hover {
   border-color: var(--sz-primary);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(108, 92, 231, 0.15);
+  transform: translateY(-3px);
+  box-shadow: var(--sz-shadow-glow);
 }
-.skill-card:hover::before {
-  opacity: 1;
-}
-.skill-card.is-selected {
+.skill-card.selected {
   border-color: var(--sz-accent);
   background: var(--sz-bg-card-hover);
 }
-.skill-card.is-selected::before {
-  opacity: 1;
-  background: var(--sz-accent);
+.card-accent {
+  height: 3px;
+  background: var(--sz-gradient);
+  opacity: 0;
+  transition: opacity 0.3s;
 }
-.card-top {
+.skill-card:hover .card-accent,
+.skill-card.selected .card-accent {
+  opacity: 1;
+}
+.card-body {
+  padding: 18px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.card-head {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 8px;
 }
 .card-name {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--sz-text);
   line-height: 1.4;
+  margin: 0;
   flex: 1;
-  margin-right: 8px;
 }
-.fav-btn {
+.star-btn {
+  flex-shrink: 0;
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--sz-text-secondary);
+  color: var(--sz-text-muted);
   padding: 4px;
   border-radius: 6px;
   transition: all 0.2s;
-  flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
-.fav-btn:hover {
-  color: #f1c40f;
-  background: rgba(241, 196, 15, 0.1);
+.star-btn:hover {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.1);
 }
-.fav-btn.active {
-  color: #f1c40f;
+.star-btn.on {
+  color: #fbbf24;
 }
 .card-desc {
   margin: 0;
@@ -175,66 +172,97 @@ function toggleFavorite(e: Event) {
   font-size: 11px;
   padding: 3px 10px;
   border-radius: 20px;
-  background: rgba(108, 92, 231, 0.1);
+  background: rgba(124, 58, 237, 0.08);
   color: var(--sz-primary-light);
-  border: 1px solid rgba(108, 92, 231, 0.2);
+  border: 1px solid rgba(124, 58, 237, 0.15);
   transition: all 0.2s;
   cursor: pointer;
+  white-space: nowrap;
 }
 .tag:hover {
-  background: rgba(108, 92, 231, 0.2);
+  background: rgba(124, 58, 237, 0.15);
 }
-.tag.highlight {
+.tag.active {
   background: var(--sz-primary);
   color: #fff;
   border-color: var(--sz-primary);
 }
-.card-bottom {
+.tag.more {
+  background: var(--sz-bg-elevated);
+  color: var(--sz-text-muted);
+  border-color: var(--sz-border);
+  cursor: default;
+}
+.card-foot {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 12px;
+  padding-top: 10px;
   border-top: 1px solid var(--sz-border);
 }
-.card-author {
+.author {
   font-size: 12px;
-  color: var(--sz-text-secondary);
+  color: var(--sz-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 140px;
 }
-.card-actions {
+.actions {
   display: flex;
   gap: 4px;
 }
-.action-btn {
+.icon-btn {
   background: none;
   border: 1px solid var(--sz-border);
-  color: var(--sz-text-secondary);
+  color: var(--sz-text-muted);
   cursor: pointer;
-  padding: 6px 8px;
+  padding: 5px 7px;
   border-radius: 6px;
   transition: all 0.2s;
   display: flex;
   align-items: center;
 }
-.action-btn:hover {
+.icon-btn:hover {
   color: var(--sz-primary-light);
   border-color: var(--sz-primary);
-  background: rgba(108, 92, 231, 0.1);
+  background: rgba(124, 58, 237, 0.08);
 }
-.selected-indicator {
+.check-badge {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 24px;
-  height: 24px;
+  top: 14px;
+  right: 14px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: var(--sz-accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.check-mark {
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
+.check-enter-active,
+.check-leave-active {
+  transition: all 0.2s;
+}
+.check-enter-from,
+.check-leave-to {
+  transform: scale(0);
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .card-body {
+    padding: 14px 14px 12px;
+    gap: 10px;
+  }
+  .card-name {
+    font-size: 14px;
+  }
+  .author {
+    max-width: 100px;
+  }
 }
 </style>

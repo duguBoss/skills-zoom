@@ -33,22 +33,18 @@ async function clearAll() {
 </script>
 
 <template>
-  <div class="favorites-view">
-    <div class="page-header">
+  <div class="favorites">
+    <div class="page-head">
       <h1 class="page-title">⭐ 我的收藏</h1>
       <div class="page-actions">
-        <span class="count-tag">{{ favoriteSkills.length }} 个 Skill</span>
-        <button
-          v-if="favoriteSkills.length > 0"
-          class="clear-all-btn"
-          @click="clearAll"
-        >
+        <span class="count">{{ favoriteSkills.length }} 个 Skill</span>
+        <button v-if="favoriteSkills.length > 0" class="clear-btn" @click="clearAll">
           <el-icon><Delete /></el-icon> 清空
         </button>
       </div>
     </div>
 
-    <div v-if="favoriteSkills.length === 0" class="empty-state">
+    <div v-if="favoriteSkills.length === 0" class="empty">
       <div class="empty-icon">⭐</div>
       <p>还没有收藏任何 Skill</p>
       <router-link to="/" class="go-btn">去发现</router-link>
@@ -65,69 +61,69 @@ async function clearAll() {
 </template>
 
 <style scoped>
-.favorites-view {
+.favorites {
   padding-bottom: 60px;
 }
-.page-header {
+.page-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   flex-wrap: wrap;
   gap: 12px;
 }
 .page-title {
   margin: 0;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--sz-text);
 }
 .page-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
-.count-tag {
+.count {
   font-size: 13px;
-  color: var(--sz-text-secondary);
+  color: var(--sz-text-muted);
   padding: 4px 12px;
   border-radius: 20px;
   background: var(--sz-bg-card);
   border: 1px solid var(--sz-border);
 }
-.clear-all-btn {
-  display: flex;
+.clear-btn {
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 8px;
-  border: 1px solid #e74c3c;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: var(--sz-radius-sm);
+  border: 1px solid #ef4444;
   background: none;
-  color: #e74c3c;
+  color: #ef4444;
   font-size: 13px;
   cursor: pointer;
   transition: all 0.2s;
 }
-.clear-all-btn:hover {
-  background: rgba(231, 76, 60, 0.1);
+.clear-btn:hover {
+  background: rgba(239, 68, 68, 0.08);
 }
-.empty-state {
+.empty {
   text-align: center;
-  padding: 80px 0;
-  color: var(--sz-text-secondary);
+  padding: 60px 0;
+  color: var(--sz-text-muted);
 }
 .empty-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
+  font-size: 40px;
+  margin-bottom: 12px;
 }
-.empty-state p {
-  margin: 0 0 20px;
-  font-size: 15px;
+.empty p {
+  margin: 0 0 16px;
+  font-size: 14px;
 }
 .go-btn {
   display: inline-block;
-  padding: 10px 28px;
-  border-radius: 8px;
+  padding: 9px 24px;
+  border-radius: var(--sz-radius-sm);
   background: var(--sz-primary);
   color: #fff;
   text-decoration: none;
@@ -139,7 +135,23 @@ async function clearAll() {
 }
 .skill-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 18px;
+  }
+  .skill-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .skill-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 </style>
