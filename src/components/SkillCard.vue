@@ -1,16 +1,21 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { useSkillsStore } from '@/stores/skills'
+import { useFavoritesStore } from '@/stores/favorites'
 import type { Skill } from '@/stores/skills'
-import { Link, Calendar, User, Check } from '@element-plus/icons-vue'
+import { Link, Calendar, User, Check, Star, StarFilled, View } from '@element-plus/icons-vue'
 
 const props = defineProps<{
   skill: Skill
 }>()
 
+const router = useRouter()
 const store = useSkillsStore()
+const favoritesStore = useFavoritesStore()
 
 const isSelected = computed(() => store.selectedSkillIds.includes(props.skill.id))
+const isFavorited = computed(() => favoritesStore.isFavorited(props.skill.id))
 
 function toggleSelect() {
   store.toggleSkillSelection(props.skill.id)
@@ -18,6 +23,15 @@ function toggleSelect() {
 
 function openRepo() {
   window.open(props.skill.repoUrl, '_blank')
+}
+
+function goDetail() {
+  router.push(`/skill/${props.skill.id}`)
+}
+
+function toggleFavorite(e: Event) {
+  e.stopPropagation()
+  favoritesStore.toggleFavorite(props.skill.id)
 }
 </script>
 
@@ -39,14 +53,25 @@ function openRepo() {
           <el-icon><Check /></el-icon> 已选
         </el-tag>
       </div>
-      <el-button
-        link
-        type="primary"
-        size="small"
-        @click.stop="openRepo"
-      >
-        <el-icon><Link /></el-icon> 仓库地址
-      </el-button>
+      <div class="header-actions">
+        <el-button
+          link
+          :type="isFavorited ? 'warning' : 'info'"
+          size="small"
+          @click.stop="toggleFavorite"
+          :title="isFavorited ? '取消收藏' : '收藏'"
+        >
+          <el-icon><component :is="isFavorited ? StarFilled : Star" /></el-icon>
+        </el-button>
+        <el-button
+          link
+          type="primary"
+          size="small"
+          @click.stop="openRepo"
+        >
+          <el-icon><Link /></el-icon> 仓库地址
+        </el-button>
+      </div>
     </div>
 
     <p class="description">{{ skill.description }}</p>
@@ -71,6 +96,18 @@ function openRepo() {
       >
         {{ tag }}
       </el-tag>
+    </div>
+
+    <div class="card-footer">
+      <el-button
+        link
+        type="primary"
+        size="small"
+        @click.stop="goDetail"
+      >
+        <el-icon><View /></el-icon>
+        查看详情
+      </el-button>
     </div>
   </el-card>
 </template>
@@ -134,5 +171,16 @@ function openRepo() {
 }
 .tag-item {
   cursor: default;
+}
+.header-actions {
+  display: flex;
+  gap: 4px;
+}
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--el-border-color-lighter);
 }
 </style>

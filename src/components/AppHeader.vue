@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { RouterLink, useRoute } from 'vue-router'
 import { computed } from 'vue'
-import { HomeFilled, Document, Collection } from '@element-plus/icons-vue'
+import { useFavoritesStore } from '@/stores/favorites'
+import { HomeFilled, Document, Collection, StarFilled, EditPen } from '@element-plus/icons-vue'
 
 const route = useRoute()
+const favoritesStore = useFavoritesStore()
 const activeIndex = computed(() => route.path)
 </script>
 
@@ -23,6 +25,19 @@ const activeIndex = computed(() => route.path)
     <el-menu-item index="/">
       <el-icon><HomeFilled /></el-icon>
       <span>首页</span>
+    </el-menu-item>
+    <el-menu-item index="/favorites">
+      <el-icon><StarFilled /></el-icon>
+      <span>我的收藏</span>
+      <el-badge
+        v-if="favoritesStore.favoritesCount > 0"
+        :value="favoritesStore.favoritesCount"
+        class="menu-badge"
+      />
+    </el-menu-item>
+    <el-menu-item index="/submit-form">
+      <el-icon><EditPen /></el-icon>
+      <span>在线投稿</span>
     </el-menu-item>
     <el-menu-item index="/submit">
       <el-icon><Document /></el-icon>
@@ -49,5 +64,11 @@ const activeIndex = computed(() => route.path)
 }
 .flex-grow {
   flex-grow: 1;
+}
+.menu-badge {
+  margin-left: 6px;
+}
+.menu-badge :deep(.el-badge__content) {
+  top: 0;
 }
 </style>
