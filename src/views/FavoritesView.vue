@@ -40,7 +40,7 @@ async function clearAll() {
         </svg>
       </div>
       <p class="empty-title">还没有收藏任何 Skill</p>
-      <p class="empty-sub">在首页发现喜欢的 Skill，点击星标即可收藏</p>
+      <p class="empty-sub">在 Skill 市场发现喜欢的项目，点击星标即可收藏</p>
       <router-link to="/" class="go-btn">去发现</router-link>
     </div>
 

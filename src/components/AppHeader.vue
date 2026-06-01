@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
-import { computed, ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useFavoritesStore } from '@/stores/favorites'
 
 const route = useRoute()
@@ -9,10 +9,16 @@ const favoritesStore = useFavoritesStore()
 const showMobile = ref(false)
 
 const navItems = [
-  { path: '/', label: '发现' },
-  { path: '/favorites', label: '收藏', count: () => favoritesStore.favoritesCount },
-  { path: '/submit-form', label: '投稿' },
+  { path: '/', label: 'Skill 市场', icon: 'M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z' },
+  { path: '/bundles', label: '服务组合', icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z' },
+  { path: '/submit', label: 'Skill 投稿', icon: 'M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z' },
+  { path: '/favorites', label: '我的收藏', count: () => favoritesStore.favoritesCount, icon: 'M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z' },
 ]
+
+const isActive = (path: string) => {
+  if (path === '/') return route.path === '/'
+  return route.path.startsWith(path)
+}
 
 function go(path: string) {
   router.push(path)
@@ -40,8 +46,11 @@ function go(path: string) {
           v-for="item in navItems"
           :key="item.path"
           :to="item.path"
-          :class="['nav-link', { active: route.path === item.path }]"
+          :class="['nav-link', { active: isActive(item.path) }]"
         >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path :d="item.icon" />
+          </svg>
           {{ item.label }}
           <span v-if="item.count && item.count() > 0" class="badge">{{ item.count() }}</span>
         </router-link>
@@ -59,9 +68,12 @@ function go(path: string) {
         <div
           v-for="item in navItems"
           :key="item.path"
-          :class="['mobile-link', { active: route.path === item.path }]"
+          :class="['mobile-link', { active: isActive(item.path) }]"
           @click="go(item.path)"
         >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path :d="item.icon" />
+          </svg>
           {{ item.label }}
           <span v-if="item.count && item.count() > 0" class="badge">{{ item.count() }}</span>
         </div>
@@ -122,10 +134,10 @@ function go(path: string) {
 .nav-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 14px;
+  gap: 5px;
+  padding: 7px 13px;
   border-radius: 8px;
-  font-size: 0.87rem;
+  font-size: 0.84rem;
   font-weight: 500;
   color: var(--c-text-secondary);
   transition: all var(--transition);

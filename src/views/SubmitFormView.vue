@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
-import { Promotion, Document, SuccessFilled } from '@element-plus/icons-vue'
+import { Promotion, Document, SuccessFilled, InfoFilled } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 
 const router = useRouter()
@@ -15,6 +15,8 @@ const form = reactive({
   description: '',
   tags: '',
   author: '',
+  category: '',
+  env: '',
 })
 
 const rules = {
@@ -36,7 +38,28 @@ const rules = {
   author: [
     { required: true, message: '请输入作者/来源', trigger: 'blur' },
   ],
+  category: [
+    { required: true, message: '请选择行业分类', trigger: 'change' },
+  ],
+  env: [
+    { required: true, message: '请输入环境要求', trigger: 'blur' },
+  ],
 }
+
+const categories = [
+  '开发工具',
+  '办公效率',
+  '信息获取',
+  'AI 增强',
+  '设计工具',
+  '运维工具',
+  '团队协作',
+  '云存储',
+  '自动化',
+  '系统工具',
+  '平台工具',
+  '其他',
+]
 
 async function handleSubmit() {
   if (!formRef.value) return
@@ -55,6 +78,8 @@ async function handleSubmit() {
       description: form.description.trim(),
       tags,
       author: form.author.trim(),
+      category: form.category,
+      env: form.env.trim(),
     }
 
     const existing = localStorage.getItem('skills-zoom-submissions')
@@ -70,7 +95,7 @@ async function handleSubmit() {
     ElMessage.success('投稿成功！审核通过后将上架展示。')
     router.push('/')
   } catch {
-    // 表单校验失败
+    // validation failed
   } finally {
     submitting.value = false
   }
@@ -87,12 +112,13 @@ function handleReset() {
       <template #header>
         <div class="card-header">
           <el-icon size="20"><Promotion /></el-icon>
-          <span>在线投稿</span>
+          <span>Skill 投稿</span>
         </div>
       </template>
 
       <el-alert
         title="欢迎投稿分享你的好用 Skill！"
+        description="经过验证的优质 Skill 将被收录到市场，并有机会被纳入行业套餐组合。"
         type="info"
         :closable="false"
         show-icon
@@ -106,14 +132,23 @@ function handleReset() {
         label-position="top"
         class="submit-form"
       >
-        <el-form-item label="Skill 名称" prop="name">
-          <el-input
-            v-model="form.name"
-            placeholder="项目的简短名称"
-            maxlength="50"
-            show-word-limit
-          />
-        </el-form-item>
+        <div class="form-grid">
+          <el-form-item label="Skill 名称" prop="name">
+            <el-input
+              v-model="form.name"
+              placeholder="项目的简短名称"
+              maxlength="50"
+              show-word-limit
+            />
+          </el-form-item>
+
+          <el-form-item label="作者 / 来源" prop="author">
+            <el-input
+              v-model="form.author"
+              placeholder="项目作者或推荐人信息"
+            />
+          </el-form-item>
+        </div>
 
         <el-form-item label="GitHub 仓库地址" prop="repoUrl">
           <el-input
@@ -127,25 +162,38 @@ function handleReset() {
             v-model="form.description"
             type="textarea"
             :rows="4"
-            placeholder="一句话描述项目用途和亮点"
+            placeholder="一句话描述项目用途和亮点，用户会在卡片上看到这段文字"
             maxlength="300"
             show-word-limit
           />
         </el-form-item>
 
+        <div class="form-grid">
+          <el-form-item label="行业分类" prop="category">
+            <el-select v-model="form.category" placeholder="选择 Skill 所属行业" style="width: 100%">
+              <el-option
+                v-for="cat in categories"
+                :key="cat"
+                :label="cat"
+                :value="cat"
+              />
+            </el-select>
+          </el-form-item>
+
+          <el-form-item label="环境要求" prop="env">
+            <el-input
+              v-model="form.env"
+              placeholder="如：Node.js 18+ / Python 3.10 / API Key"
+            />
+          </el-form-item>
+        </div>
+
         <el-form-item label="标签" prop="tags">
           <el-input
             v-model="form.tags"
-            placeholder="用逗号分隔，如：Vue3, AI工具, 效率"
+            placeholder="用逗号分隔，如：MCP, Python, 代码执行"
           />
-          <div class="form-hint">建议 2-5 个分类标签，用逗号分隔</div>
-        </el-form-item>
-
-        <el-form-item label="作者/来源" prop="author">
-          <el-input
-            v-model="form.author"
-            placeholder="项目作者或推荐人信息"
-          />
+          <div class="form-hint">建议 2-5 个分类标签，帮助用户精准发现你的 Skill</div>
         </el-form-item>
 
         <el-form-item>
@@ -173,6 +221,9 @@ function handleReset() {
           <el-timeline-item type="success">
             <strong>信息完整</strong>：请尽量提供完整的项目信息和准确的标签分类
           </el-timeline-item>
+          <el-timeline-item type="success">
+            <strong>环境说明</strong>：清晰说明运行环境和依赖要求，降低用户使用门槛
+          </el-timeline-item>
           <el-timeline-item type="warning">
             <strong>禁止广告</strong>：纯商业推广、恶意软件、侵权项目将不予通过
           </el-timeline-item>
@@ -188,7 +239,6 @@ function handleReset() {
         </h3>
         <p>如有任何问题或建议，欢迎通过以下方式联系：</p>
         <el-descriptions :column="1" border>
-          <el-descriptions-item label="公众号">黑曜石科技工坊</el-descriptions-item>
           <el-descriptions-item label="GitHub">
             <el-link type="primary" href="https://github.com/duguBoss/skills-zoom" target="_blank">
               duguBoss/skills-zoom
@@ -221,6 +271,16 @@ function handleReset() {
 }
 .submit-form {
   margin-bottom: 24px;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 }
 .form-hint {
   font-size: 12px;

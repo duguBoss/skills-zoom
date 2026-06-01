@@ -1,27 +1,37 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useSkillsStore } from '@/stores/skills'
+import { useBundlesStore } from '@/stores/bundles'
 import SkillCard from '@/components/SkillCard.vue'
 import { ElMessage } from 'element-plus'
 
+const router = useRouter()
 const store = useSkillsStore()
+const bundleStore = useBundlesStore()
+
+const exportFormat = ref<'plain' | 'workbuddy' | 'kimi'>('plain')
+const showExportMenu = ref(false)
 
 function handleExport() {
   if (store.selectedSkillIds.length === 0) {
     ElMessage.warning('请先选择至少一个 Skill')
     return
   }
-  const content = store.exportSelected()
+  const skills = store.selectedSkills
+  const content = store.exportSkillsAsConfig(skills, exportFormat.value)
+  const ext = exportFormat.value === 'workbuddy' ? 'json' : exportFormat.value === 'kimi' ? 'yaml' : 'txt'
   const blob = new Blob([content], { type: 'text/plain;charset=utf-8' })
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = `skills-${new Date().toISOString().slice(0, 10)}.txt`
+  a.download = `skills-${exportFormat.value}-${new Date().toISOString().slice(0, 10)}.${ext}`
   document.body.appendChild(a)
   a.click()
   document.body.removeChild(a)
   URL.revokeObjectURL(url)
-  ElMessage.success(`已导出 ${store.selectedSkillIds.length} 个 Skill 地址`)
+  ElMessage.success(`已导出 ${store.selectedSkillIds.length} 个 Skill (${exportFormat.value})`)
+  showExportMenu.value = false
 }
 
 function handleCopy() {
@@ -29,10 +39,14 @@ function handleCopy() {
     ElMessage.warning('请先选择至少一个 Skill')
     return
   }
-  const content = store.exportSelected()
+  const content = store.exportSkillsAsConfig(store.selectedSkills, exportFormat.value)
   navigator.clipboard.writeText(content).then(() => {
     ElMessage.success('已复制到剪贴板')
   })
+}
+
+function goBundle(id: string) {
+  router.push(`/bundle/${id}`)
 }
 </script>
 
@@ -42,27 +56,57 @@ function handleCopy() {
       <div class="hero-content">
         <div class="hero-badge">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          AI Skill Marketplace
+          经过验证的 Skill 应用市场
         </div>
         <h1 class="hero-title">
-          发现 &amp; 管理<br/>
-          <span class="hero-highlight">优质 AI Skill</span>
+          发现优质 AI Skill<br/>
+          <span class="hero-highlight">一键组装工作流</span>
         </h1>
-        <p class="hero-sub">汇集 MCP 服务器、AI 编程助手、Prompt 模板等能力扩展方案，让 AI 助手发挥无限潜能</p>
+        <p class="hero-sub">汇集 MCP 服务器、AI 编程助手、Prompt 模板等经过验证的能力扩展，降低从「发现」到「落地」的摩擦成本</p>
         <div class="hero-stats">
           <div class="stat">
             <span class="stat-num">{{ store.skills.length }}</span>
-            <span class="stat-label">收录 Skill</span>
+            <span class="stat-label">已验证 Skill</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat">
-            <span class="stat-num">{{ store.allTags.length }}</span>
-            <span class="stat-label">分类标签</span>
+            <span class="stat-num">{{ bundleStore.bundles.length }}</span>
+            <span class="stat-label">行业套餐</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat">
-            <span class="stat-num">GitHub</span>
-            <span class="stat-label">开源仓库</span>
+            <span class="stat-num">{{ store.allCategories.length }}</span>
+            <span class="stat-label">覆盖领域</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bundles-preview">
+      <div class="section-head">
+        <h2 class="section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          热门服务组合
+        </h2>
+        <router-link to="/bundles" class="section-more">查看全部 &rarr;</router-link>
+      </div>
+      <div class="bundle-grid">
+        <div
+          v-for="bundle in bundleStore.bundles.slice(0, 4)"
+          :key="bundle.id"
+          class="bundle-card"
+          :style="{ '--bcolor': bundle.color }"
+          @click="goBundle(bundle.id)"
+        >
+          <div class="bundle-icon">{{ bundle.icon }}</div>
+          <div class="bundle-info">
+            <h3 class="bundle-name">{{ bundle.name }}</h3>
+            <p class="bundle-desc">{{ bundle.description }}</p>
+            <div class="bundle-tags">
+              <span class="bundle-tag" :style="{ background: bundle.color + '18', color: bundle.color }">{{ bundle.industry }}</span>
+              <span class="bundle-tag" :style="{ background: bundle.color + '18', color: bundle.color }">{{ bundle.difficulty }}</span>
+              <span class="bundle-tag" :style="{ background: bundle.color + '18', color: bundle.color }">{{ bundle.skillIds.length }} 个 Skill</span>
+            </div>
           </div>
         </div>
       </div>
@@ -77,11 +121,26 @@ function handleCopy() {
           <input
             v-model="store.searchQuery"
             class="search-input"
-            placeholder="搜索 Skill 名称、描述或标签..."
+            placeholder="搜索 Skill 名称、描述、标签或行业..."
           />
           <button v-if="store.searchQuery" class="search-clear" @click="store.searchQuery = ''">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <div class="category-scroll">
+          <button
+            :class="['cat-chip', { on: !store.selectedCategory }]"
+            @click="store.selectedCategory = ''"
+          >全部行业</button>
+          <button
+            v-for="cat in store.allCategories"
+            :key="cat"
+            :class="['cat-chip', { on: store.selectedCategory === cat }]"
+            @click="store.selectedCategory = store.selectedCategory === cat ? '' : cat"
+          >{{ cat }}</button>
         </div>
       </div>
 
@@ -95,9 +154,9 @@ function handleCopy() {
           >{{ tag }}</button>
         </div>
         <button
-          v-if="store.selectedTags.length > 0 || store.searchQuery"
+          v-if="store.selectedTags.length > 0 || store.searchQuery || store.selectedCategory"
           class="reset-chip"
-          @click="store.selectedTags = []; store.searchQuery = ''"
+          @click="store.selectedTags = []; store.searchQuery = ''; store.selectedCategory = ''"
         >
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
           重置
@@ -109,10 +168,21 @@ function handleCopy() {
           <button class="tb-btn" @click="store.selectAllVisible">
             {{ store.filteredSkills.every(s => store.selectedSkillIds.includes(s.id)) ? '取消全选' : '全选当前' }}
           </button>
-          <button class="tb-btn" @click="handleCopy" :disabled="store.selectedSkillIds.length === 0">复制地址</button>
-          <button class="tb-btn primary" @click="handleExport" :disabled="store.selectedSkillIds.length === 0">导出文件</button>
+          <button class="tb-btn" @click="handleCopy" :disabled="store.selectedSkillIds.length === 0">复制</button>
+          <div class="export-wrap">
+            <button class="tb-btn primary" @click="handleExport" :disabled="store.selectedSkillIds.length === 0">
+              导出配置
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="export-menu">
+              <div class="export-label">导出格式</div>
+              <label class="export-option"><input type="radio" v-model="exportFormat" value="plain" /> 纯文本 (.txt)</label>
+              <label class="export-option"><input type="radio" v-model="exportFormat" value="workbuddy" /> Workbuddy (.json)</label>
+              <label class="export-option"><input type="radio" v-model="exportFormat" value="kimi" /> Kimi CLI (.yaml)</label>
+            </div>
+          </div>
           <span v-if="store.selectedSkillIds.length > 0" class="sel-count">
-            已选 {{ store.selectedSkillIds.length }} / {{ store.filteredSkills.length }}
+            已选 {{ store.selectedSkillIds.length }}
           </span>
         </div>
         <span class="result-count">共 {{ store.filteredSkills.length }} 个 Skill</span>
@@ -127,7 +197,7 @@ function handleCopy() {
       </div>
       <p class="empty-title">没有匹配的 Skill</p>
       <p class="empty-sub">试试调整筛选条件或搜索关键词</p>
-      <button class="empty-btn" @click="store.selectedTags = []; store.searchQuery = ''">清除所有筛选</button>
+      <button class="empty-btn" @click="store.selectedTags = []; store.searchQuery = ''; store.selectedCategory = ''">清除所有筛选</button>
     </div>
 
     <div v-else class="grid">
@@ -193,7 +263,7 @@ function handleCopy() {
 .hero-sub {
   font-size: 0.95rem;
   color: var(--c-text-secondary);
-  max-width: 500px;
+  max-width: 540px;
   line-height: 1.6;
   margin: 0 0 24px;
 }
@@ -223,11 +293,96 @@ function handleCopy() {
   background: var(--c-border);
 }
 
+.bundles-preview {
+  margin-bottom: 28px;
+}
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.section-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--c-text);
+  margin: 0;
+}
+.section-more {
+  font-size: 0.8rem;
+  color: var(--c-primary);
+  font-weight: 500;
+  transition: opacity var(--transition);
+}
+.section-more:hover {
+  opacity: 0.7;
+}
+.bundle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+.bundle-card {
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.bundle-card:hover {
+  border-color: var(--bcolor);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+.bundle-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.bundle-info {
+  flex: 1;
+  min-width: 0;
+}
+.bundle-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--c-text);
+  margin: 0 0 5px;
+}
+.bundle-desc {
+  font-size: 0.78rem;
+  color: var(--c-text-secondary);
+  line-height: 1.5;
+  margin: 0 0 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.bundle-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.bundle-tag {
+  font-size: 0.68rem;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
 .controls {
   margin-bottom: 18px;
 }
 .search-row {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 .search-wrap {
   position: relative;
@@ -270,12 +425,42 @@ function handleCopy() {
   color: var(--c-text);
 }
 
+.filter-row {
+  margin-bottom: 10px;
+}
+.category-scroll {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.cat-chip {
+  padding: 5px 13px;
+  border-radius: 20px;
+  border: 1.5px solid var(--c-border);
+  background: var(--c-surface);
+  color: var(--c-text-secondary);
+  font-size: 0.76rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.cat-chip:hover {
+  border-color: var(--c-primary);
+  color: var(--c-primary);
+}
+.cat-chip.on {
+  background: var(--c-primary);
+  color: #fff;
+  border-color: var(--c-primary);
+}
+
 .action-row {
   display: flex;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 .tag-scroll {
   display: flex;
@@ -357,10 +542,62 @@ function handleCopy() {
   background: var(--c-primary);
   color: #fff;
   border-color: var(--c-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 .tb-btn.primary:hover:not(:disabled) {
   background: var(--c-primary-dark);
   border-color: var(--c-primary-dark);
+}
+.export-wrap {
+  position: relative;
+  display: inline-block;
+}
+.export-wrap:hover .export-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.export-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  box-shadow: var(--c-shadow-lg);
+  min-width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: all var(--transition);
+  z-index: 50;
+}
+.export-label {
+  font-size: 0.7rem;
+  color: var(--c-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.export-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--c-text-secondary);
+  padding: 5px 0;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+.export-option:hover {
+  color: var(--c-primary);
+}
+.export-option input {
+  accent-color: var(--c-primary);
 }
 .sel-count {
   font-size: 0.78rem;
@@ -431,23 +668,26 @@ function handleCopy() {
   .stat-num {
     font-size: 1.1rem;
   }
+  .bundle-grid {
+    grid-template-columns: 1fr;
+  }
   .grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
-  .tag-scroll {
+  .tag-scroll, .category-scroll {
     overflow-x: auto;
     flex-wrap: nowrap;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 4px;
   }
-  .tag-scroll::-webkit-scrollbar {
+  .tag-scroll::-webkit-scrollbar, .category-scroll::-webkit-scrollbar {
     display: none;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .grid {
+  .grid, .bundle-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .hero-title {

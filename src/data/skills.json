@@ -6,7 +6,12 @@
     "description": "MCP 官方代码执行 Skill，让 AI 助手在沙箱中安全运行 Python 代码，支持文件读写、网络请求等操作。",
     "tags": ["MCP", "代码执行", "Python"],
     "author": "Anthropic",
-    "addedAt": "2025-06-10"
+    "addedAt": "2025-06-10",
+    "category": "开发工具",
+    "rating": 4.8,
+    "downloads": 12500,
+    "env": "Python 3.10+",
+    "verified": true
   },
   {
     "id": "2",
@@ -15,7 +20,12 @@
     "description": "为 AI 助手提供网络搜索能力，支持实时网页搜索和新闻查询，让 AI 获取最新信息。",
     "tags": ["MCP", "搜索", "工具"],
     "author": "Anthropic",
-    "addedAt": "2025-06-08"
+    "addedAt": "2025-06-08",
+    "category": "信息获取",
+    "rating": 4.6,
+    "downloads": 18900,
+    "env": "Brave API Key",
+    "verified": true
   },
   {
     "id": "3",
@@ -24,7 +34,12 @@
     "description": "让 AI 助手直接操作 GitHub 仓库，管理 Issue、PR、文件等，实现 AI 驱动的代码工作流。",
     "tags": ["MCP", "GitHub", "DevOps"],
     "author": "Anthropic",
-    "addedAt": "2025-06-05"
+    "addedAt": "2025-06-05",
+    "category": "开发工具",
+    "rating": 4.9,
+    "downloads": 22100,
+    "env": "GitHub Token",
+    "verified": true
   },
   {
     "id": "4",
@@ -33,7 +48,12 @@
     "description": "AI 控制浏览器完成网页自动化操作，支持截图、表单填写、页面抓取等浏览器技能。",
     "tags": ["MCP", "浏览器", "自动化"],
     "author": "Anthropic",
-    "addedAt": "2025-06-03"
+    "addedAt": "2025-06-03",
+    "category": "自动化",
+    "rating": 4.5,
+    "downloads": 8700,
+    "env": "Node.js 18+",
+    "verified": true
   },
   {
     "id": "5",
@@ -42,7 +62,12 @@
     "description": "增强 AI 的深度推理能力，通过多步思考链解决复杂问题，适合数学、逻辑分析场景。",
     "tags": ["MCP", "推理", "思维链"],
     "author": "Anthropic",
-    "addedAt": "2025-06-01"
+    "addedAt": "2025-06-01",
+    "category": "AI 增强",
+    "rating": 4.7,
+    "downloads": 15300,
+    "env": "无额外依赖",
+    "verified": true
   },
   {
     "id": "6",
@@ -51,7 +76,12 @@
     "description": "为 AI 助手提供持久化记忆能力，记住用户偏好和历史对话，实现个性化智能交互。",
     "tags": ["MCP", "记忆", "知识库"],
     "author": "Anthropic",
-    "addedAt": "2025-05-30"
+    "addedAt": "2025-05-30",
+    "category": "AI 增强",
+    "rating": 4.4,
+    "downloads": 11200,
+    "env": "SQLite / PostgreSQL",
+    "verified": true
   },
   {
     "id": "7",
@@ -60,7 +90,12 @@
     "description": "AI 直接查询和管理 PostgreSQL 数据库，支持 Schema 浏览、SQL 执行、数据分析。",
     "tags": ["MCP", "数据库", "SQL"],
     "author": "Anthropic",
-    "addedAt": "2025-05-28"
+    "addedAt": "2025-05-28",
+    "category": "开发工具",
+    "rating": 4.6,
+    "downloads": 9800,
+    "env": "PostgreSQL 12+",
+    "verified": true
   },
   {
     "id": "8",
@@ -69,7 +104,12 @@
     "description": "连接 Obsidian 笔记库，让 AI 助手读取、搜索、创建笔记，打造智能知识管理助手。",
     "tags": ["MCP", "Obsidian", "笔记"],
     "author": "Pdwud",
-    "addedAt": "2025-05-25"
+    "addedAt": "2025-05-25",
+    "category": "办公效率",
+    "rating": 4.5,
+    "downloads": 7400,
+    "env": "Obsidian Vault 路径",
+    "verified": true
   },
   {
     "id": "9",
@@ -78,7 +118,12 @@
     "description": "精选 Cursor AI 编程规则集，帮助 AI 更好地理解项目架构、代码规范和最佳实践。",
     "tags": ["Cursor", "编程规则", "代码规范"],
     "author": "PatrickJS",
-    "addedAt": "2025-05-22"
+    "addedAt": "2025-05-22",
+    "category": "开发工具",
+    "rating": 4.8,
+    "downloads": 25600,
+    "env": "Cursor IDE",
+    "verified": true
   },
   {
     "id": "10",
@@ -87,7 +132,12 @@
     "description": "Claude Code 自定义命令库，快速生成项目模板、代码审查、自动化测试等常用操作。",
     "tags": ["Claude", "命令行", "自动化"],
     "author": "Anthropic",
-    "addedAt": "2025-05-20"
+    "addedAt": "2025-05-20",
+    "category": "开发工具",
+    "rating": 4.7,
+    "downloads": 19800,
+    "env": "Claude Code CLI",
+    "verified": true
   },
   {
     "id": "11",
@@ -96,7 +146,12 @@
     "description": "Continue IDE 插件生态，扩展 AI 编程助手能力，支持自定义模型、上下文和工具。",
     "tags": ["Continue", "IDE插件", "AI编程"],
     "author": "continuedev",
-    "addedAt": "2025-05-18"
+    "addedAt": "2025-05-18",
+    "category": "开发工具",
+    "rating": 4.5,
+    "downloads": 13200,
+    "env": "VS Code / JetBrains",
+    "verified": true
   },
   {
     "id": "12",
@@ -105,7 +160,12 @@
     "description": "终端 AI 结对编程工具，通过自定义 conventions 文件定义项目规范，让 AI 写出一致代码。",
     "tags": ["Aider", "结对编程", "代码规范"],
     "author": "paul-gauthier",
-    "addedAt": "2025-05-15"
+    "addedAt": "2025-05-15",
+    "category": "开发工具",
+    "rating": 4.6,
+    "downloads": 10500,
+    "env": "Git + OpenAI API",
+    "verified": true
   },
   {
     "id": "13",
@@ -114,7 +174,12 @@
     "description": "为 AI 助手提供安全的文件系统访问能力，支持读写文件、目录浏览、文件搜索等操作。",
     "tags": ["MCP", "文件系统", "工具"],
     "author": "Anthropic",
-    "addedAt": "2025-05-12"
+    "addedAt": "2025-05-12",
+    "category": "系统工具",
+    "rating": 4.3,
+    "downloads": 16700,
+    "env": "文件系统权限",
+    "verified": true
   },
   {
     "id": "14",
@@ -123,7 +188,12 @@
     "description": "AI 直接读取 Figma 设计稿，自动生成代码实现，打通设计与开发之间的管道。",
     "tags": ["MCP", "Figma", "设计转代码"],
     "author": "GLips",
-    "addedAt": "2025-05-10"
+    "addedAt": "2025-05-10",
+    "category": "设计工具",
+    "rating": 4.4,
+    "downloads": 8900,
+    "env": "Figma API Token",
+    "verified": true
   },
   {
     "id": "15",
@@ -132,7 +202,12 @@
     "description": "将网页内容转换为 AI 可读的 Markdown 格式，让 AI 助手轻松获取和分析在线文档。",
     "tags": ["MCP", "网页抓取", "Markdown"],
     "author": "Anthropic",
-    "addedAt": "2025-05-08"
+    "addedAt": "2025-05-08",
+    "category": "信息获取",
+    "rating": 4.5,
+    "downloads": 20100,
+    "env": "无额外依赖",
+    "verified": true
   },
   {
     "id": "16",
@@ -141,7 +216,12 @@
     "description": "连接 Notion 工作空间，让 AI 助手管理页面、数据库、待办事项，实现智能工作流。",
     "tags": ["MCP", "Notion", "工作流"],
     "author": "suekou",
-    "addedAt": "2025-05-05"
+    "addedAt": "2025-05-05",
+    "category": "办公效率",
+    "rating": 4.6,
+    "downloads": 14500,
+    "env": "Notion Integration Token",
+    "verified": true
   },
   {
     "id": "17",
@@ -150,7 +230,12 @@
     "description": "AI 助手操作 Excel 文件，支持数据读写、公式计算、图表生成，办公效率倍增。",
     "tags": ["MCP", "Excel", "办公"],
     "author": "haris-musa",
-    "addedAt": "2025-05-03"
+    "addedAt": "2025-05-03",
+    "category": "办公效率",
+    "rating": 4.2,
+    "downloads": 6800,
+    "env": "Python + openpyxl",
+    "verified": true
   },
   {
     "id": "18",
@@ -159,7 +244,12 @@
     "description": "AI 管理 Docker 容器和镜像，支持启动、停止、日志查看，DevOps 运维好帮手。",
     "tags": ["MCP", "Docker", "运维"],
     "author": "QuantGeekDev",
-    "addedAt": "2025-05-01"
+    "addedAt": "2025-05-01",
+    "category": "运维工具",
+    "rating": 4.4,
+    "downloads": 9200,
+    "env": "Docker Daemon",
+    "verified": true
   },
   {
     "id": "19",
@@ -168,7 +258,12 @@
     "description": "最全面的 Prompt 工程指南，包含各类提示词模板、技巧和最佳实践，提升 AI 输出质量。",
     "tags": ["Prompt", "提示词", "学习"],
     "author": "dair-ai",
-    "addedAt": "2025-04-28"
+    "addedAt": "2025-04-28",
+    "category": "AI 增强",
+    "rating": 4.9,
+    "downloads": 31200,
+    "env": "无额外依赖",
+    "verified": true
   },
   {
     "id": "20",
@@ -177,7 +272,12 @@
     "description": "200+ 精心设计的 ChatGPT 提示词模板，涵盖写作、编程、分析、教育等各个领域。",
     "tags": ["Prompt", "ChatGPT", "模板"],
     "author": "f",
-    "addedAt": "2025-04-25"
+    "addedAt": "2025-04-25",
+    "category": "AI 增强",
+    "rating": 4.7,
+    "downloads": 27800,
+    "env": "无额外依赖",
+    "verified": true
   },
   {
     "id": "21",
@@ -186,7 +286,12 @@
     "description": "AI 助手接入 Slack 工作区，发送消息、管理频道、搜索对话，实现智能团队协作。",
     "tags": ["MCP", "Slack", "协作"],
     "author": "Anthropic",
-    "addedAt": "2025-04-22"
+    "addedAt": "2025-04-22",
+    "category": "团队协作",
+    "rating": 4.3,
+    "downloads": 7600,
+    "env": "Slack Bot Token",
+    "verified": true
   },
   {
     "id": "22",
@@ -195,7 +300,12 @@
     "description": "连接 Google Drive，让 AI 搜索、读取、创建云端文档，打通云存储与 AI 能力。",
     "tags": ["MCP", "Google", "云存储"],
     "author": "Anthropic",
-    "addedAt": "2025-04-20"
+    "addedAt": "2025-04-20",
+    "category": "云存储",
+    "rating": 4.4,
+    "downloads": 11300,
+    "env": "Google Service Account",
+    "verified": true
   },
   {
     "id": "23",
@@ -204,7 +314,12 @@
     "description": "AI Skill 聚合分享平台，发现、收藏、分享最好用的 AI 技能和插件，让 AI 能力无限扩展。",
     "tags": ["平台", "Skill", "社区"],
     "author": "黑曜石科技工坊",
-    "addedAt": "2025-06-15"
+    "addedAt": "2025-06-15",
+    "category": "平台工具",
+    "rating": 4.5,
+    "downloads": 5400,
+    "env": "Node.js 20+",
+    "verified": true
   },
   {
     "id": "24",
@@ -213,7 +328,12 @@
     "description": "将任意 URL 转换为 AI 友好的 Markdown 内容，搜索网页时自动调用，获取高质量文本。",
     "tags": ["搜索", "内容提取", "Markdown"],
     "author": "jina-ai",
-    "addedAt": "2025-04-18"
+    "addedAt": "2025-04-18",
+    "category": "信息获取",
+    "rating": 4.6,
+    "downloads": 18400,
+    "env": "无额外依赖 / Jina API",
+    "verified": true
   },
   {
     "id": "25",
@@ -222,6 +342,11 @@
     "description": "AI 管理 Todoist 任务列表，创建待办、设置提醒、整理项目，智能时间管理助手。",
     "tags": ["MCP", "任务管理", "效率"],
     "author": "Anthropic",
-    "addedAt": "2025-04-15"
+    "addedAt": "2025-04-15",
+    "category": "办公效率",
+    "rating": 4.2,
+    "downloads": 6900,
+    "env": "Todoist API Token",
+    "verified": true
   }
 ]

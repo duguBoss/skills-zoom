@@ -25,7 +25,7 @@ import AppHeader from '@/components/AppHeader.vue'
         </div>
         <div class="footer-links">
           <a href="https://github.com/duguBoss/skills-zoom" target="_blank" class="footer-link">GitHub</a>
-          <router-link to="/submit-form" class="footer-link">投稿</router-link>
+          <router-link to="/submit" class="footer-link">投稿</router-link>
         </div>
       </div>
     </footer>
