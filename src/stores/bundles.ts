@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { apiGet } from '@/config/api'
+import { apiGetBundles } from '@/config/api'
 import { useSkillsStore } from './skills'
 import type { Skill } from './skills'
 
@@ -24,7 +24,7 @@ export const useBundlesStore = defineStore('bundles', () => {
   async function loadBundles() {
     loading.value = true
     try {
-      bundles.value = await apiGet<Bundle[]>('/api/bundles')
+      bundles.value = await apiGetBundles()
     } catch (err) {
       console.error('Failed to load bundles:', err)
     } finally {

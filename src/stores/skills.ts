@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { apiGet } from '@/config/api'
+import { apiGetSkills } from '@/config/api'
 
 export interface Skill {
   id: string
@@ -28,7 +28,7 @@ export const useSkillsStore = defineStore('skills', () => {
   async function loadSkills() {
     loading.value = true
     try {
-      skills.value = await apiGet<Skill[]>('/api/skills')
+      skills.value = await apiGetSkills()
     } catch (err) {
       console.error('Failed to load skills:', err)
     } finally {
