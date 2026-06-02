@@ -4,7 +4,11 @@
     "name": "Ai-Agent-Skill Framework",
     "repoUrl": "https://github.com/tdatdz/Ai-Agent-Skill",
     "description": "提供自动化的 Skill 分发与同步框架，通过版本控制管理 AI Agent 的编码标准与工作流，确保团队级的一致性。",
-    "tags": ["Agent Skill", "开发框架", "自动化"],
+    "tags": [
+      "Agent Skill",
+      "开发框架",
+      "自动化"
+    ],
     "author": "tdatdz",
     "addedAt": "2025-06-01",
     "category": "开发工具",
@@ -18,7 +22,11 @@
     "name": "Awesome Cursor Rules",
     "repoUrl": "https://github.com/PatrickJS/awesome-cursorrules",
     "description": "精选的 Cursor AI 编程规则集（.cursorrules）。为各种框架和语言提供开箱即用的 AI 编程规范和最佳实践指引。",
-    "tags": ["Cursor", "代码规范", "最佳实践"],
+    "tags": [
+      "Cursor",
+      "代码规范",
+      "最佳实践"
+    ],
     "author": "PatrickJS",
     "addedAt": "2024-11-20",
     "category": "编程辅助",
@@ -32,7 +40,11 @@
     "name": "Agent Skills Library",
     "repoUrl": "https://github.com/dylanfeltus/skills",
     "description": "专注于研究与设计领域的 AI Agent Skill 集合。能够自动适配 Claude Code、Cursor 等多种流行 AI 代码助手。",
-    "tags": ["设计", "研究", "Agent Skill"],
+    "tags": [
+      "设计",
+      "研究",
+      "Agent Skill"
+    ],
     "author": "dylanfeltus",
     "addedAt": "2025-03-15",
     "category": "设计与研究",
@@ -46,7 +58,11 @@
     "name": "Agent Skill Standard Repo",
     "repoUrl": "https://github.com/netresearch/agent-skill-repo",
     "description": "提供了标准化的 AI Skill 仓库结构模板，保证了布局、打包以及 CI/CD 工作流的统一性，方便快速开发自己的 Skill。",
-    "tags": ["模板", "标准", "CI/CD"],
+    "tags": [
+      "模板",
+      "标准",
+      "CI/CD"
+    ],
     "author": "netresearch",
     "addedAt": "2025-01-10",
     "category": "开发工具",
@@ -60,11 +76,15 @@
     "name": "Awesome ChatGPT Prompts",
     "repoUrl": "https://github.com/f/awesome-chatgpt-prompts",
     "description": "全球最受欢迎的 ChatGPT 提示词模板合集（Prompt Skills），涵盖角色扮演、代码审核、创意写作等数百个实用场景。",
-    "tags": ["Prompt", "ChatGPT", "模板"],
+    "tags": [
+      "Prompt",
+      "ChatGPT",
+      "模板"
+    ],
     "author": "f",
     "addedAt": "2023-01-05",
     "category": "AI 增强",
-    "rating": 5.0,
+    "rating": 5,
     "downloads": 150000,
     "env": "任何 LLM",
     "verified": true
@@ -74,7 +94,11 @@
     "name": "Prompt Engineering Guide",
     "repoUrl": "https://github.com/dair-ai/Prompt-Engineering-Guide",
     "description": "不仅是教程，更是一套系统化的 Prompt 技能库。包含高级提示词工程技巧和可复用的结构化 Skill 范例。",
-    "tags": ["Prompt 工程", "教程", "技能集"],
+    "tags": [
+      "Prompt 工程",
+      "教程",
+      "技能集"
+    ],
     "author": "dair-ai",
     "addedAt": "2023-05-12",
     "category": "学习资源",
@@ -88,7 +112,11 @@
     "name": "Skills Installer CLI",
     "repoUrl": "https://github.com/plaited/skills-installer",
     "description": "专为 AI 编程助手（如 Cursor、Claude Code）设计的 CLI 工具，用于一键安装和管理符合 agent-skills-spec 的技能包。",
-    "tags": ["CLI", "包管理", "安装器"],
+    "tags": [
+      "CLI",
+      "包管理",
+      "安装器"
+    ],
     "author": "plaited",
     "addedAt": "2025-04-20",
     "category": "系统工具",
@@ -102,7 +130,11 @@
     "name": "Agent Skill Validator",
     "repoUrl": "https://github.com/Meet-Miyani/agent-skill-validator",
     "description": "用于校验 .skill 压缩包和项目文件夹的工具，确保您的 AI Skill 遵循标准结构并满足 Token 预算限制。",
-    "tags": ["校验", "开发工具", "规范"],
+    "tags": [
+      "校验",
+      "开发工具",
+      "规范"
+    ],
     "author": "Meet-Miyani",
     "addedAt": "2025-05-05",
     "category": "开发工具",
@@ -116,7 +148,11 @@
     "name": "Mastering GitHub Agent Skill",
     "repoUrl": "https://github.com/SpillwaveSolutions/mastering-github-agent-skill",
     "description": "专为 AI Agent 打造的 GitHub 技能包，教会 AI 如何熟练使用 GitHub CLI 进行仓库搜索、CI/CD 监控和工作流编写。",
-    "tags": ["GitHub CLI", "自动化", "DevOps"],
+    "tags": [
+      "GitHub CLI",
+      "自动化",
+      "DevOps"
+    ],
     "author": "SpillwaveSolutions",
     "addedAt": "2025-02-18",
     "category": "编程辅助",
@@ -130,7 +166,11 @@
     "name": "Skill-Anything",
     "repoUrl": "https://github.com/SYuan03/Skill-Anything",
     "description": "将 PDF、网页和视频等任意信息源提取为结构化的 AI Skill，支持自动生成知识测验和抽认卡，将信息转化为模型技能。",
-    "tags": ["知识提取", "文档解析", "学习"],
+    "tags": [
+      "知识提取",
+      "文档解析",
+      "学习"
+    ],
     "author": "SYuan03",
     "addedAt": "2024-10-22",
     "category": "信息获取",

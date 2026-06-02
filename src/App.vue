@@ -23,9 +23,7 @@ onErrorCaptured((err: unknown) => {
         {{ crashError }}
       </div>
       <RouterView v-else v-slot="{ Component }">
-        <transition name="page" mode="out-in">
-          <component :is="Component" />
-        </transition>
+        <component :is="Component" />
       </RouterView>
     </main>
     <footer class="footer">

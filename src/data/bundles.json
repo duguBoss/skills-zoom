@@ -6,8 +6,18 @@
     "description": "专为 AI Coder 打造。集成了各类代码规范指令、高级 Prompt 工程模板和 Cursor 最佳实践，让你的 AI 编程助手更加懂你。",
     "industry": "技术开发",
     "difficulty": "高级",
-    "skillIds": ["skill-awesome-cursorrules", "skill-mastering-github", "skill-dylanfeltus", "skill-installer"],
-    "highlights": ["Cursor 规则", "代码规范", "GitHub 自动化", "极速分发"],
+    "skillIds": [
+      "skill-awesome-cursorrules",
+      "skill-mastering-github",
+      "skill-dylanfeltus",
+      "skill-installer"
+    ],
+    "highlights": [
+      "Cursor 规则",
+      "代码规范",
+      "GitHub 自动化",
+      "极速分发"
+    ],
     "color": "#6366f1"
   },
   {
@@ -17,8 +27,16 @@
     "description": "从零到一掌握提示词工程。包含全球最火爆的 ChatGPT 场景提示词与深度结构化指令体系。",
     "industry": "AI 增强",
     "difficulty": "入门",
-    "skillIds": ["skill-awesome-chatgpt-prompts", "skill-prompt-engineering"],
-    "highlights": ["万能模板", "系统化学习", "结构化框架", "角色扮演"],
+    "skillIds": [
+      "skill-awesome-chatgpt-prompts",
+      "skill-prompt-engineering"
+    ],
+    "highlights": [
+      "万能模板",
+      "系统化学习",
+      "结构化框架",
+      "角色扮演"
+    ],
     "color": "#8b5cf6"
   },
   {
@@ -28,8 +46,17 @@
     "description": "让整个开发或研究团队共享同一个 AI 大脑。通过自动化框架和标准仓库同步所有人的 Agent 配置。",
     "industry": "团队协作",
     "difficulty": "中级",
-    "skillIds": ["skill-ai-agent-skill", "skill-agent-skill-repo", "skill-validator"],
-    "highlights": ["团队同步", "Agent 标准", "CI/CD 自动化", "强制校验"],
+    "skillIds": [
+      "skill-ai-agent-skill",
+      "skill-agent-skill-repo",
+      "skill-validator"
+    ],
+    "highlights": [
+      "团队同步",
+      "Agent 标准",
+      "CI/CD 自动化",
+      "强制校验"
+    ],
     "color": "#10b981"
   },
   {
@@ -39,8 +66,16 @@
     "description": "将碎片化的网页、文档和视频转化为 AI 能够理解的结构化学习卡片，打造强大的研究信息流。",
     "industry": "学习与研究",
     "difficulty": "中级",
-    "skillIds": ["skill-anything", "skill-dylanfeltus"],
-    "highlights": ["文档解析", "信息提取", "学习卡片", "研究专用"],
+    "skillIds": [
+      "skill-anything",
+      "skill-dylanfeltus"
+    ],
+    "highlights": [
+      "文档解析",
+      "信息提取",
+      "学习卡片",
+      "研究专用"
+    ],
     "color": "#f59e0b"
   }
 ]
