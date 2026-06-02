@@ -28,12 +28,12 @@ async function clearAll() {
     <div class="head">
       <div class="head-left">
         <h1 class="title">我的收藏</h1>
-        <span class="sub">{{ list.length }} 个 Skill</span>
+        <span class="sub">{{ list?.length || 0 }} 个 Skill</span>
       </div>
-      <button v-if="list.length > 0" class="clear-btn" @click="clearAll">清空全部</button>
+      <button v-if="(list?.length || 0) > 0" class="clear-btn" @click="clearAll">清空全部</button>
     </div>
 
-    <div v-if="list.length === 0" class="empty">
+    <div v-if="(list?.length || 0) === 0" class="empty">
       <div class="empty-art">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--c-amber)">
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
@@ -45,7 +45,7 @@ async function clearAll() {
     </div>
 
     <div v-else class="grid">
-      <SkillCard v-for="s in list" :key="s.id" :skill="s" />
+      <SkillCard v-for="s in (list || [])" :key="s.id" :skill="s" />
     </div>
   </div>
 </template>

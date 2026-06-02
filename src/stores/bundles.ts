@@ -37,7 +37,7 @@ export const useBundlesStore = defineStore('bundles', () => {
 
   function getBundleSkills(bundle: Bundle): Skill[] {
     const skillsStore = useSkillsStore()
-    return bundle.skillIds
+    return (bundle.skillIds || [])
       .map(id => skillsStore.getSkillById(id))
       .filter((s): s is Skill => s !== undefined)
   }
