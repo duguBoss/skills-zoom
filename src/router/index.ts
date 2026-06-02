@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import BundleView from '../views/BundleView.vue'
 import BundleDetailView from '../views/BundleDetailView.vue'
@@ -7,7 +7,7 @@ import SkillDetailView from '../views/SkillDetailView.vue'
 import FavoritesView from '../views/FavoritesView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
