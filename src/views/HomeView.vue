@@ -68,17 +68,17 @@ function goBundle(id: string) {
         <p class="hero-sub">汇集精选的 Cursor 规则、Agent 指令集、Prompt 模板等纯粹的 Skill 扩展配置，帮助您快速赋能 AI 助手，统一团队规范，打造专业的个人工作流。</p>
         <div class="hero-stats">
           <div class="stat-item">
-            <span class="stat-num">{{ store.skills.length }}</span>
+            <span class="stat-num">{{ store.skills?.length || 0 }}</span>
             <span class="stat-label">已验证 Skill</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <span class="stat-num">{{ bundleStore.bundles.length }}</span>
+            <span class="stat-num">{{ bundleStore.bundles?.length || 0 }}</span>
             <span class="stat-label">精选套餐</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <span class="stat-num">{{ store.allCategories.length }}</span>
+            <span class="stat-num">{{ store.allCategories?.length || 0 }}</span>
             <span class="stat-label">覆盖领域</span>
           </div>
         </div>
@@ -155,7 +155,7 @@ function goBundle(id: string) {
           <div class="bundle-glow"></div>
           <div class="bundle-top">
             <div class="bundle-icon">{{ bundle.icon }}</div>
-            <div class="bundle-count">{{ bundle.skillIds.length }} Skills</div>
+            <div class="bundle-count">{{ bundle.skillIds?.length || 0 }} Skills</div>
           </div>
           <h3 class="bundle-name">{{ bundle.name }}</h3>
           <p class="bundle-desc">{{ bundle.description }}</p>
@@ -172,20 +172,20 @@ function goBundle(id: string) {
       <div class="market-header">
         <div class="market-title-wrap">
           <h2 class="section-title">Skill 市场</h2>
-          <span class="result-count">{{ store.filteredSkills.length }} 项结果</span>
+          <span class="result-count">{{ store.filteredSkills?.length || 0 }} 项结果</span>
         </div>
         
         <div class="toolbar">
           <button class="tb-btn" @click="store.selectAllVisible">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></svg>
-            {{ store.filteredSkills.every(s => store.selectedSkillIds.includes(s.id)) ? '取消全选' : '全选当前' }}
+            {{ (store.filteredSkills || []).every(s => (store.selectedSkillIds || []).includes(s.id)) ? '取消全选' : '全选当前' }}
           </button>
-          <button class="tb-btn" @click="handleCopy" :disabled="store.selectedSkillIds.length === 0">
+          <button class="tb-btn" @click="handleCopy" :disabled="(store.selectedSkillIds?.length || 0) === 0">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             复制配置
           </button>
           <div class="export-dropdown">
-            <button class="tb-btn primary-btn" @click="handleExport" :disabled="store.selectedSkillIds.length === 0">
+            <button class="tb-btn primary-btn" @click="handleExport" :disabled="(store.selectedSkillIds?.length || 0) === 0">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               导出构建
             </button>
@@ -202,8 +202,8 @@ function goBundle(id: string) {
               </label>
             </div>
           </div>
-          <span v-if="store.selectedSkillIds.length > 0" class="sel-badge">
-            已选择 {{ store.selectedSkillIds.length }} 项
+          <span v-if="(store.selectedSkillIds?.length || 0) > 0" class="sel-badge">
+            已选择 {{ store.selectedSkillIds?.length || 0 }} 项
           </span>
         </div>
       </div>
@@ -243,7 +243,7 @@ function goBundle(id: string) {
           <div class="fg-label">标签</div>
           <div class="tag-chips">
             <button
-              v-for="tag in store.allTags"
+              v-for="tag in (store.allTags || [])"
               :key="tag"
               :class="['tag-chip', { on: store.selectedTags.includes(tag) }]"
               @click="store.toggleTag(tag)"
@@ -260,7 +260,7 @@ function goBundle(id: string) {
         </div>
       </div>
 
-      <div v-if="store.filteredSkills.length === 0" class="empty-state">
+      <div v-if="(store.filteredSkills?.length || 0) === 0" class="empty-state">
         <div class="empty-visual">
           <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
         </div>
@@ -270,7 +270,7 @@ function goBundle(id: string) {
       </div>
 
       <div v-else class="skill-grid">
-        <SkillCard v-for="skill in store.filteredSkills" :key="skill.id" :skill="skill" />
+        <SkillCard v-for="skill in (store.filteredSkills || [])" :key="skill.id" :skill="skill" />
       </div>
     </section>
   </div>
