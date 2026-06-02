@@ -178,5 +178,419 @@
     "downloads": 7800,
     "env": "Python",
     "verified": true
+  },
+  {
+    "id": "skill-video-spec-builder",
+    "name": "Video Spec Builder",
+    "repoUrl": "https://github.com/feicaiclub/video-spec-builder",
+    "description": "专业的视频制作规格文档生成器。根据项目需求自动生成完整的视频技术规格书，包括分辨率、帧率、编码格式、色彩空间等关键参数，确保团队协作标准统一。",
+    "tags": [
+      "视频规格",
+      "技术文档",
+      "团队协作"
+    ],
+    "author": "feicaiclub",
+    "addedAt": "2025-06-02",
+    "category": "设计工具",
+    "rating": 4.5,
+    "downloads": 3200,
+    "env": "Node.js",
+    "verified": false
+  },
+  {
+    "id": "skill-hyperframes",
+    "name": "HyperFrames by HeyGen",
+    "repoUrl": "https://github.com/heygen-com/hyperframes",
+    "description": "HeyGen 开源的 AI 视频帧生成框架。支持高质量数字人视频、口型同步、多语言翻译和风格化视频生成，是 AI 视频创作的强大引擎。",
+    "tags": [
+      "AI视频生成",
+      "数字人",
+      "口型同步",
+      "HeyGen"
+    ],
+    "author": "heygen-com",
+    "addedAt": "2025-06-02",
+    "category": "AI 增强",
+    "rating": 4.8,
+    "downloads": 28000,
+    "env": "Python / API Key",
+    "verified": true
+  },
+  {
+    "id": "skill-remotion",
+    "name": "Remotion",
+    "repoUrl": "https://github.com/remotion-dev/remotion",
+    "description": "用 React 写视频的开源框架。通过编写 JSX 组件来程序化生成视频，支持动画、数据可视化、模板渲染，让开发者以写代码的方式创作专业视频内容。",
+    "tags": [
+      "React",
+      "程序化视频",
+      "动画",
+      "开发者工具"
+    ],
+    "author": "remotion-dev",
+    "addedAt": "2025-06-02",
+    "category": "开发工具",
+    "rating": 4.9,
+    "downloads": 65000,
+    "env": "Node.js / React",
+    "verified": true
+  },
+  {
+    "id": "skill-sora",
+    "name": "OpenAI Sora",
+    "repoUrl": "https://openai.com/sora",
+    "description": "OpenAI 推出的 AI 视频生成模型。通过文本提示即可生成高质量、逼真的视频内容，支持多种风格和时长控制。",
+    "tags": [
+      "AI 视频生成",
+      "文本转视频",
+      "创意"
+    ],
+    "author": "OpenAI",
+    "addedAt": "2025-06-01",
+    "category": "AI 增强",
+    "rating": 4.8,
+    "downloads": 95000,
+    "env": "API Key",
+    "verified": true
+  },
+  {
+    "id": "skill-ffmpeg-video-editor",
+    "name": "FFmpeg Video Editor",
+    "repoUrl": "https://github.com/FFmpeg/FFmpeg",
+    "description": "强大的开源视频处理引擎。支持视频剪辑、格式转换、压缩、提取音频、调整分辨率、添加字幕等数百种视频操作。",
+    "tags": [
+      "视频剪辑",
+      "格式转换",
+      "音频提取",
+      "压缩"
+    ],
+    "author": "FFmpeg",
+    "addedAt": "2025-06-01",
+    "category": "设计工具",
+    "rating": 4.9,
+    "downloads": 250000,
+    "env": "FFmpeg CLI",
+    "verified": true
+  },
+  {
+    "id": "skill-video-frames",
+    "name": "Video Frames Extractor",
+    "repoUrl": "https://github.com/FFmpeg/FFmpeg",
+    "description": "从视频中提取帧画面或短片段，支持按时间戳精确截取、批量导出为图片序列，方便制作封面、预览图和素材库。",
+    "tags": [
+      "帧提取",
+      "截图",
+      "素材"
+    ],
+    "author": "FFmpeg",
+    "addedAt": "2025-06-01",
+    "category": "设计工具",
+    "rating": 4.6,
+    "downloads": 42000,
+    "env": "FFmpeg CLI",
+    "verified": true
+  },
+  {
+    "id": "skill-autoglm-generate-image",
+    "name": "AutoGLM 文生图",
+    "repoUrl": "https://github.com/THUDM/AutoGLM",
+    "description": "基于 AutoGLM 的 AI 图像生成接口，根据文字描述生成高质量图片。支持多种风格、尺寸和创意场景。",
+    "tags": [
+      "文生图",
+      "AI 绘图",
+      "图像生成"
+    ],
+    "author": "THUDM",
+    "addedAt": "2025-06-01",
+    "category": "AI 增强",
+    "rating": 4.7,
+    "downloads": 38000,
+    "env": "Token 自动获取",
+    "verified": true
+  },
+  {
+    "id": "skill-anthropic-skills",
+    "name": "Anthropic Skills",
+    "repoUrl": "https://github.com/anthropics/skills",
+    "description": "Anthropic 官方维护的 Agent Skills 公共仓库。包含标准化的 Skill 定义、示例实现和市场规范，是构建跨平台兼容 Agent Skill 的权威参考。",
+    "tags": [
+      "官方",
+      "Agent Skill",
+      "标准",
+      "Claude"
+    ],
+    "author": "anthropics",
+    "addedAt": "2025-06-02",
+    "category": "开发工具",
+    "rating": 4.9,
+    "downloads": 62000,
+    "env": "兼容主流 Agent",
+    "verified": true
+  },
+  {
+    "id": "skill-openhands",
+    "name": "OpenHands",
+    "repoUrl": "https://github.com/All-Hands-AI/OpenHands",
+    "description": "开源 AI 驱动软件开发平台（原 OpenDevin）。支持 SDK、CLI、GUI 和云端部署，在 SWE-Bench Verified 上达到 SOTA 表现，让 AI 自主完成复杂开发任务。",
+    "tags": [
+      "AI 开发",
+      "自主代理",
+      "SWE-Bench",
+      "开源"
+    ],
+    "author": "All-Hands-AI",
+    "addedAt": "2025-06-02",
+    "category": "开发工具",
+    "rating": 4.8,
+    "downloads": 65000,
+    "env": "Python / Docker",
+    "verified": true
+  },
+  {
+    "id": "skill-aider",
+    "name": "Aider",
+    "repoUrl": "https://github.com/paul-gauthier/aider",
+    "description": "终端中的 AI 结对编程工具。能够映射整个代码库进行上下文感知的多文件编辑，支持 Claude、GPT、DeepSeek 等多种模型，是开发者最喜爱的 CLI 编码助手之一。",
+    "tags": [
+      "结对编程",
+      "CLI",
+      "多文件编辑",
+      "Git 集成"
+    ],
+    "author": "paul-gauthier",
+    "addedAt": "2025-06-02",
+    "category": "编程辅助",
+    "rating": 4.9,
+    "downloads": 40000,
+    "env": "Python / Git",
+    "verified": true
+  },
+  {
+    "id": "skill-browser-use",
+    "name": "Browser Use",
+    "repoUrl": "https://github.com/browser-use/browser-use",
+    "description": "让 AI 代理能够自动化操作浏览器。支持多提供商（OpenAI、Google、Anthropic、Ollama），使网站对 AI 完全可访问，是 AI 浏览器自动化的领先框架。",
+    "tags": [
+      "浏览器自动化",
+      "AI 代理",
+      "多模型",
+      "Web"
+    ],
+    "author": "browser-use",
+    "addedAt": "2025-06-02",
+    "category": "自动化",
+    "rating": 4.8,
+    "downloads": 50000,
+    "env": "Python / API Key",
+    "verified": true
+  },
+  {
+    "id": "skill-mcp-servers",
+    "name": "MCP Servers",
+    "repoUrl": "https://github.com/modelcontextprotocol/servers",
+    "description": "Anthropic 官方 Model Context Protocol (MCP) 服务器参考实现集合。展示 MCP 的 versatility，为 LLM 提供安全、受控的工具和数据源访问能力。",
+    "tags": [
+      "MCP",
+      "官方",
+      "协议",
+      "工具集成"
+    ],
+    "author": "modelcontextprotocol",
+    "addedAt": "2025-06-02",
+    "category": "平台工具",
+    "rating": 4.9,
+    "downloads": 35000,
+    "env": "Node.js / Python",
+    "verified": true
+  },
+  {
+    "id": "skill-cline",
+    "name": "Cline",
+    "repoUrl": "https://github.com/cline/cline",
+    "description": "VSCode 中的自主编码代理。能够在编辑器中直接执行终端命令、读写文件、浏览网页，实现端到端的自动化开发工作流。",
+    "tags": [
+      "VSCode",
+      "自主代理",
+      "IDE",
+      "编码"
+    ],
+    "author": "cline",
+    "addedAt": "2025-06-02",
+    "category": "编程辅助",
+    "rating": 4.7,
+    "downloads": 28000,
+    "env": "VSCode 插件",
+    "verified": true
+  },
+  {
+    "id": "skill-roo-code",
+    "name": "Roo Code",
+    "repoUrl": "https://github.com/RooVetGit/Roo-Code",
+    "description": "专家级 AI 编码助手（原 RooCode）。支持 BYOM（自带模型）、本地模型部署，为有经验的开发者提供深度定制和精细控制的编码体验。",
+    "tags": [
+      "专家级",
+      "BYOM",
+      "本地模型",
+      "VSCode"
+    ],
+    "author": "RooVetGit",
+    "addedAt": "2025-06-02",
+    "category": "编程辅助",
+    "rating": 4.7,
+    "downloads": 22000,
+    "env": "VSCode 插件",
+    "verified": true
+  },
+  {
+    "id": "skill-mattpocock-skills",
+    "name": "Matt Pocock Skills",
+    "repoUrl": "https://github.com/mattpocock/skills",
+    "description": "为真实工程师打造的 Skills 集合。直接来自作者的 .claude 目录，包含经过实战验证的 TypeScript、React 和系统工程 Skill，提升 Claude Code 的编码质量。",
+    "tags": [
+      "TypeScript",
+      "React",
+      "工程实践",
+      "实战验证"
+    ],
+    "author": "mattpocock",
+    "addedAt": "2025-06-02",
+    "category": "开发工具",
+    "rating": 4.8,
+    "downloads": 18000,
+    "env": "Claude Code",
+    "verified": false
+  },
+  {
+    "id": "skill-humanizer",
+    "name": "Humanizer",
+    "repoUrl": "https://github.com/blader/humanizer",
+    "description": "Claude Code Skill，用于消除文本中的 AI 生成痕迹。通过重写和优化让内容更自然、更像人类写作，适用于内容创作、营销文案和学术写作。",
+    "tags": [
+      "去 AI 痕迹",
+      "文本优化",
+      "内容创作",
+      "写作"
+    ],
+    "author": "blader",
+    "addedAt": "2025-06-02",
+    "category": "AI 增强",
+    "rating": 4.6,
+    "downloads": 16000,
+    "env": "Claude Code",
+    "verified": false
+  },
+  {
+    "id": "skill-caveman",
+    "name": "Caveman",
+    "repoUrl": "https://github.com/JuliusBrussee/caveman",
+    "description": "「为什么用很多 token 当几个 token 就能搞定」—— 这个 Claude Code Skill 通过极简的「穴居人」语言风格，减少 65% 的 token 消耗，同时保持指令有效性。",
+    "tags": [
+      "Token 优化",
+      "极简",
+      "效率",
+      "Claude"
+    ],
+    "author": "JuliusBrussee",
+    "addedAt": "2025-06-02",
+    "category": "AI 增强",
+    "rating": 4.5,
+    "downloads": 12000,
+    "env": "Claude Code",
+    "verified": false
+  },
+  {
+    "id": "skill-vibe-tools",
+    "name": "Vibe Tools",
+    "repoUrl": "https://github.com/eastlondoner/vibe-tools",
+    "description": "给 Cursor Agent 配备 AI 团队和高级技能。扩展 Cursor 的内置能力，支持多代理协作、复杂工作流和高级工具调用，让 Cursor 更像一个完整的开发团队。",
+    "tags": [
+      "Cursor",
+      "多代理",
+      "工作流",
+      "团队协作"
+    ],
+    "author": "eastlondoner",
+    "addedAt": "2025-06-02",
+    "category": "开发工具",
+    "rating": 4.6,
+    "downloads": 9500,
+    "env": "Cursor IDE",
+    "verified": false
+  },
+  {
+    "id": "skill-dev-browser",
+    "name": "Dev Browser",
+    "repoUrl": "https://github.com/SawyerHood/dev-browser",
+    "description": "赋予 AI Agent 完整浏览器操作能力的 Claude Skill。支持页面导航、元素交互、数据抓取和表单填写，让 Agent 能够真正「看」和「操作」网页。",
+    "tags": [
+      "浏览器",
+      "网页操作",
+      "数据抓取",
+      "自动化"
+    ],
+    "author": "SawyerHood",
+    "addedAt": "2025-06-02",
+    "category": "自动化",
+    "rating": 4.5,
+    "downloads": 8500,
+    "env": "Claude Code / API",
+    "verified": false
+  },
+  {
+    "id": "skill-obsidian-skills",
+    "name": "Obsidian Skills",
+    "repoUrl": "https://github.com/kepano/obsidian-skills",
+    "description": "Obsidian 笔记软件的 Agent Skills。教你的 AI Agent 使用 Markdown、数据库、JSON Canvas 和 CLI，将 Obsidian 变成强大的知识管理和研究工具。",
+    "tags": [
+      "Obsidian",
+      "知识管理",
+      "Markdown",
+      "研究"
+    ],
+    "author": "kepano",
+    "addedAt": "2025-06-02",
+    "category": "信息获取",
+    "rating": 4.7,
+    "downloads": 14000,
+    "env": "Obsidian / Node.js",
+    "verified": false
+  },
+  {
+    "id": "skill-claude-skills-collection",
+    "name": "Claude Skills Collection",
+    "repoUrl": "https://github.com/alirezarezvani/claude-skills",
+    "description": "232+ Claude Code Skills 和 Agent 插件，覆盖工程、营销、产品、合规、高管咨询等 8 个领域。兼容 Claude Code、Codex、Gemini CLI、Cursor 等 20+ 平台。",
+    "tags": [
+      "Skills 合集",
+      "多领域",
+      "跨平台",
+      "Claude"
+    ],
+    "author": "alirezarezvani",
+    "addedAt": "2025-06-02",
+    "category": "AI 增强",
+    "rating": 4.6,
+    "downloads": 13000,
+    "env": "兼容主流 Agent",
+    "verified": false
+  },
+  {
+    "id": "skill-planning-with-files",
+    "name": "Planning with Files",
+    "repoUrl": "https://github.com/OthmanAdi/planning-with-files",
+    "description": "实现 Manus 风格持久化 Markdown 规划的 Claude Code Skill。采用文件驱动的规划工作流，是 Manus 被 20 亿美元收购背后的核心模式实现。",
+    "tags": [
+      "规划",
+      "Manus",
+      "Markdown",
+      "工作流"
+    ],
+    "author": "OthmanAdi",
+    "addedAt": "2025-06-02",
+    "category": "办公效率",
+    "rating": 4.7,
+    "downloads": 11000,
+    "env": "Claude Code",
+    "verified": false
   }
 ]

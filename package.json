@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "server": "node server/index.js",
+    "dev:full": "run-p server dev",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "node scripts/sync-db.js && vite build",
@@ -15,7 +17,9 @@
     "deploy": "npm run build-only && gh-pages -d dist"
   },
   "dependencies": {
+    "cors": "^2.8.6",
     "element-plus": "^2.14.1",
+    "express": "^5.2.1",
     "pinia": "^3.0.4",
     "vue": "^3.5.32",
     "vue-router": "^5.0.4"
@@ -23,6 +27,8 @@
   "devDependencies": {
     "@element-plus/icons-vue": "^2.3.2",
     "@tsconfig/node24": "^24.0.4",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
     "@types/node": "^24.12.2",
     "@vitejs/plugin-vue": "^6.0.6",
     "@vue/eslint-config-typescript": "^14.7.0",

@@ -77,5 +77,29 @@
       "研究专用"
     ],
     "color": "#f59e0b"
+  },
+  {
+    "id": "bundle-video",
+    "name": "AI 视频制作工坊",
+    "icon": "🎬",
+    "description": "一站式视频创作工具箱。从 AI 生成视频、专业剪辑处理到帧画面提取，覆盖视频制作全流程，让内容创作零门槛。",
+    "industry": "视频制作",
+    "difficulty": "中级",
+    "skillIds": [
+      "skill-sora",
+      "skill-ffmpeg-video-editor",
+      "skill-video-frames",
+      "skill-autoglm-generate-image",
+      "skill-video-spec-builder",
+      "skill-hyperframes",
+      "skill-remotion"
+    ],
+    "highlights": [
+      "AI 视频生成",
+      "专业剪辑",
+      "帧画面提取",
+      "文生图辅助"
+    ],
+    "color": "#e11d48"
   }
 ]

@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { useRouter } from 'vue-router'
-import { Promotion, Document, SuccessFilled, InfoFilled } from '@element-plus/icons-vue'
+import { Promotion, Document, SuccessFilled, InfoFilled, CopyDocument } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
-
-const router = useRouter()
 
 const formRef = ref()
 const submitting = ref(false)
+const dialogVisible = ref(false)
+const submissionText = ref('')
 
 const form = reactive({
   name: '',
@@ -82,18 +81,8 @@ async function handleSubmit() {
       env: form.env.trim(),
     }
 
-    const existing = localStorage.getItem('skills-zoom-submissions')
-    const submissions = existing ? JSON.parse(existing) : []
-    submissions.push({
-      ...payload,
-      id: `sub-${Date.now()}`,
-      submittedAt: new Date().toISOString().slice(0, 10),
-      status: 'pending',
-    })
-    localStorage.setItem('skills-zoom-submissions', JSON.stringify(submissions))
-
-    ElMessage.success('投稿成功！审核通过后将上架展示。')
-    router.push('/')
+    submissionText.value = generateSubmissionText(payload)
+    dialogVisible.value = true
   } catch {
     // validation failed
   } finally {
@@ -101,8 +90,36 @@ async function handleSubmit() {
   }
 }
 
+function generateSubmissionText(payload: Record<string, any>) {
+  return `【Skill 投稿】
+━━━━━━━━━━━━━━━━━━━━
+📛 名称：${payload.name}
+👤 作者/来源：${payload.author}
+🔗 仓库地址：${payload.repoUrl}
+📂 行业分类：${payload.category}
+🏷️ 标签：${payload.tags.join('、')}
+🔧 环境要求：${payload.env}
+📝 简介说明：${payload.description}
+━━━━━━━━━━━━━━━━━━━━
+请审核，谢谢！`
+}
+
+async function copyContent() {
+  try {
+    await navigator.clipboard.writeText(submissionText.value)
+    ElMessage.success('内容已复制，快去公众号私信投稿吧！')
+  } catch {
+    ElMessage.error('复制失败，请手动选中复制')
+  }
+}
+
 function handleReset() {
   formRef.value?.resetFields()
+}
+
+function closeDialog() {
+  dialogVisible.value = false
+  handleReset()
 }
 </script>
 
@@ -247,6 +264,42 @@ function handleReset() {
         </el-descriptions>
       </div>
     </el-card>
+
+    <!-- 投稿成功弹窗 -->
+    <el-dialog
+      v-model="dialogVisible"
+      title="🎉 投稿成功"
+      width="520px"
+      align-center
+      :close-on-click-modal="false"
+      @closed="handleReset"
+    >
+      <div class="dialog-content">
+        <div class="qrcode-section">
+          <img src="/qrcode-wechat.jpg" alt="公众号二维码" class="qrcode-img" />
+          <p class="qrcode-tip">👆 扫码关注公众号，私信发送下方内容即可投稿</p>
+        </div>
+
+        <div class="submission-preview">
+          <div class="preview-header">
+            <span>📋 投稿内容</span>
+            <el-button type="primary" size="small" @click="copyContent">
+              <el-icon><CopyDocument /></el-icon>
+              一键复制
+            </el-button>
+          </div>
+          <pre class="preview-body">{{ submissionText }}</pre>
+        </div>
+      </div>
+
+      <template #footer>
+        <el-button @click="closeDialog">关闭</el-button>
+        <el-button type="primary" @click="copyContent">
+          <el-icon><CopyDocument /></el-icon>
+          复制内容并关闭
+        </el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -298,5 +351,54 @@ function handleReset() {
 .contact p {
   color: var(--el-text-color-regular);
   margin-bottom: 16px;
+}
+
+/* 弹窗样式 */
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.qrcode-section {
+  text-align: center;
+}
+.qrcode-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid var(--el-border-color-lighter);
+}
+.qrcode-tip {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--el-text-color-regular);
+}
+.submission-preview {
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--el-fill-color-light);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--el-text-color-primary);
+}
+.preview-body {
+  padding: 14px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--el-text-color-regular);
+  background: #fafafa;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 240px;
+  overflow-y: auto;
 }
 </style>

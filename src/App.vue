@@ -1,8 +1,17 @@
 <script setup lang="ts">
-import { ref, onErrorCaptured } from 'vue'
+import { ref, onMounted, onErrorCaptured } from 'vue'
 import AppHeader from '@/components/AppHeader.vue'
+import { useSkillsStore } from '@/stores/skills'
+import { useBundlesStore } from '@/stores/bundles'
 
 const crashError = ref<string | null>(null)
+const skillsStore = useSkillsStore()
+const bundlesStore = useBundlesStore()
+
+onMounted(() => {
+  skillsStore.loadSkills()
+  bundlesStore.loadBundles()
+})
 
 onErrorCaptured((err: unknown) => {
   if (err instanceof Error) {

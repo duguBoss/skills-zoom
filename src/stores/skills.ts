@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import skillsData from '@/data/skills.json'
+import { apiGet } from '@/config/api'
 
 export interface Skill {
   id: string
@@ -18,11 +18,23 @@ export interface Skill {
 }
 
 export const useSkillsStore = defineStore('skills', () => {
-  const skills = ref<Skill[]>(skillsData as Skill[])
+  const skills = ref<Skill[]>([])
+  const loading = ref(false)
   const selectedTags = ref<string[]>([])
   const selectedCategory = ref<string>('')
   const searchQuery = ref('')
   const selectedSkillIds = ref<string[]>([])
+
+  async function loadSkills() {
+    loading.value = true
+    try {
+      skills.value = await apiGet<Skill[]>('/api/skills')
+    } catch (err) {
+      console.error('Failed to load skills:', err)
+    } finally {
+      loading.value = false
+    }
+  }
 
   const allTags = computed(() => {
     const tagSet = new Set<string>()
@@ -141,6 +153,7 @@ export const useSkillsStore = defineStore('skills', () => {
 
   return {
     skills,
+    loading,
     selectedTags,
     selectedCategory,
     searchQuery,
@@ -150,6 +163,7 @@ export const useSkillsStore = defineStore('skills', () => {
     filteredSkills,
     selectedSkills,
     getSkillById,
+    loadSkills,
     toggleTag,
     toggleSkillSelection,
     selectSkillIds,
