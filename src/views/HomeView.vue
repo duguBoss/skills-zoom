@@ -89,11 +89,11 @@ function goBundle(id: string) {
     <section class="skill-explanation">
       <div class="se-container">
         <div class="se-content">
-          <h2 class="se-title">什么是纯粹的 AI Skill？</h2>
+          <h2 class="se-title">什么是全局 Skill (Global Skill)？</h2>
           <p class="se-desc">
-            AI Skill 是一种结构化的能力模板和规范定义（例如 <strong>.cursorrules</strong>、<strong>SKILL.md</strong>，或是成熟的 <strong>Prompt 体系</strong>），用于赋予 AI Agent 专业的角色、行业知识和标准化的工作流模式。
+            全局 Skill 是一种在 AI Agent 中跨会话持久生效的核心能力配置（例如 <strong>.cursorrules</strong>、<strong>系统级 Prompt</strong> 或是<strong>底层工作流规范</strong>）。它赋予 AI 稳定的专业角色、行业知识和标准化的处理模式。
             <br/><br/>
-            不同于重量级的服务端协议，纯粹的 Skill 更加轻量化，开箱即用。在这里，你可以像获取 npm 包一样发现并应用这些开源技能配置，瞬间将通用的 AI 大模型升级为你的领域专家。
+            只要配置了全局 Skill，你的 AI 就像加载了专属的“被动技能”，无需每次对话重复设定。在这里，你可以一键发现并组装这些经过开源验证的全局技能。
           </p>
           <div class="se-features">
             <div class="sef-item">

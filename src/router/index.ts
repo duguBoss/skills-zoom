@@ -45,6 +45,10 @@ const router = createRouter({
       component: FavoritesView,
       meta: { title: '我的收藏' }
     },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/'
+    }
   ],
 })
 
