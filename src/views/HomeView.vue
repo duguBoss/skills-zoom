@@ -65,7 +65,7 @@ function goBundle(id: string) {
           发现优质 AI Skill
           <span class="hero-highlight">构建超级 AI 助手</span>
         </h1>
-        <p class="hero-sub">汇集 MCP 服务器、AI 编程助手、Prompt 模板等经过验证的能力扩展，降低从「发现」到「落地」的摩擦成本，助你打造独一无二的专属工作流。</p>
+        <p class="hero-sub">汇集精选的 Cursor 规则、Agent 指令集、Prompt 模板等纯粹的 Skill 扩展配置，帮助您快速赋能 AI 助手，统一团队规范，打造专业的个人工作流。</p>
         <div class="hero-stats">
           <div class="stat-item">
             <span class="stat-num">{{ store.skills.length }}</span>
@@ -89,24 +89,24 @@ function goBundle(id: string) {
     <section class="skill-explanation">
       <div class="se-container">
         <div class="se-content">
-          <h2 class="se-title">什么是 AI Skill？</h2>
+          <h2 class="se-title">什么是纯粹的 AI Skill？</h2>
           <p class="se-desc">
-            AI Skill 是连接大语言模型与外部世界的基础能力单元。它可以是 <strong>MCP (Model Context Protocol) 服务器</strong>，使 AI 能够安全地读取本地文件、操作数据库；也可以是 <strong>Prompt 模板</strong>，快速设定 AI 的专业角色和思维模式；或是 <strong>自动化工作流脚本</strong>。
+            AI Skill 是一种结构化的能力模板和规范定义（例如 <strong>.cursorrules</strong>、<strong>SKILL.md</strong>，或是成熟的 <strong>Prompt 体系</strong>），用于赋予 AI Agent 专业的角色、行业知识和标准化的工作流模式。
             <br/><br/>
-            在这里，您可以像搭积木一样，发现并组装这些经过验证的原子能力，为您的大模型赋予超级能力，实现真正意义上的效率飞跃。
+            不同于重量级的服务端协议，纯粹的 Skill 更加轻量化，开箱即用。在这里，你可以像获取 npm 包一样发现并应用这些开源技能配置，瞬间将通用的 AI 大模型升级为你的领域专家。
           </p>
           <div class="se-features">
             <div class="sef-item">
-              <div class="sef-icon primary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-              <span>MCP 协议全面支持</span>
+              <div class="sef-icon primary-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+              <span>结构化指令集与规则</span>
             </div>
             <div class="sef-item">
               <div class="sef-icon cyan-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
-              <span>一键拼装与导出</span>
+              <span>轻量级，一键应用</span>
             </div>
             <div class="sef-item">
               <div class="sef-icon amber-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-              <span>开箱即用的验证保障</span>
+              <span>开源社区验证的最佳实践</span>
             </div>
           </div>
         </div>
@@ -119,13 +119,13 @@ function goBundle(id: string) {
             <div class="orbit-ring ring-1"></div>
             <div class="orbit-ring ring-2"></div>
             <div class="satellite sat-1">
-              <div class="sat-inner">MCP</div>
+              <div class="sat-inner">Rules</div>
             </div>
             <div class="satellite sat-2">
               <div class="sat-inner">Prompt</div>
             </div>
             <div class="satellite sat-3">
-              <div class="sat-inner">Tools</div>
+              <div class="sat-inner">Config</div>
             </div>
           </div>
         </div>
