@@ -26,13 +26,25 @@ export const useSkillsStore = defineStore('skills', () => {
 
   const allTags = computed(() => {
     const tagSet = new Set<string>()
-    skills.value.forEach(skill => skill.tags.forEach(tag => tagSet.add(tag)))
+    const list = skills.value || []
+    list.forEach(skill => {
+      if (skill && skill.tags) {
+        skill.tags.forEach(tag => {
+          if (tag) tagSet.add(tag)
+        })
+      }
+    })
     return Array.from(tagSet).sort()
   })
 
   const allCategories = computed(() => {
     const catSet = new Set<string>()
-    skills.value.forEach(skill => catSet.add(skill.category))
+    const list = skills.value || []
+    list.forEach(skill => {
+      if (skill && skill.category) {
+        catSet.add(skill.category)
+      }
+    })
     return Array.from(catSet).sort()
   })
 

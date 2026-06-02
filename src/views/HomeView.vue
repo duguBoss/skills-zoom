@@ -146,7 +146,7 @@ function goBundle(id: string) {
       </div>
       <div class="bundle-grid">
         <div
-          v-for="bundle in bundleStore.bundles.slice(0, 4)"
+          v-for="bundle in (bundleStore.bundles || []).slice(0, 4)"
           :key="bundle.id"
           class="bundle-card"
           :style="{ '--bcolor': bundle.color }"
@@ -330,6 +330,8 @@ function goBundle(id: string) {
   align-items: center;
   justify-content: center;
   text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 .hero-bg {
   position: absolute;
@@ -346,6 +348,8 @@ function goBundle(id: string) {
   filter: blur(100px);
   opacity: 0.4;
   animation: float 10s ease-in-out infinite alternate;
+  /* prevent glow from causing scroll */
+  pointer-events: none;
 }
 .glow-1 {
   top: -200px;
@@ -419,10 +423,13 @@ function goBundle(id: string) {
   gap: 40px;
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 20px 48px;
   border-radius: var(--r-2xl);
   border: 1px solid rgba(255, 255, 255, 0.8);
   box-shadow: var(--shadow-md);
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .stat-item {
   display: flex;
@@ -465,6 +472,7 @@ function goBundle(id: string) {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
+  overflow: hidden;
 }
 .se-content {
   padding: 60px;
@@ -529,8 +537,9 @@ function goBundle(id: string) {
 }
 .orbit-container {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 260px;
+  height: 260px;
+  flex-shrink: 0;
 }
 .center-core {
   position: absolute;
@@ -571,8 +580,8 @@ function goBundle(id: string) {
   border-radius: 50%;
   border: 1px dashed rgba(255, 255, 255, 0.2);
 }
-.ring-1 { width: 180px; height: 180px; animation: spin 20s linear infinite; }
-.ring-2 { width: 280px; height: 280px; animation: spin 30s linear infinite reverse; }
+.ring-1 { width: 160px; height: 160px; animation: spin 20s linear infinite; }
+.ring-2 { width: 250px; height: 250px; animation: spin 30s linear infinite reverse; }
 
 .satellite {
   position: absolute;
@@ -1048,7 +1057,7 @@ function goBundle(id: string) {
 
 .skill-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 24px;
 }
 
@@ -1060,55 +1069,183 @@ function goBundle(id: string) {
     grid-template-columns: repeat(2, 1fr);
   }
   .skill-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
   .se-container {
     grid-template-columns: 1fr;
   }
   .se-visual {
-    min-height: 300px;
+    min-height: 280px;
+  }
+  .hero {
+    padding: 60px 40px;
+  }
+  .hero-title {
+    font-size: 2.8rem;
+    letter-spacing: -1.5px;
+  }
+  .hero-stats {
+    gap: 28px;
+    padding: 20px 32px;
   }
 }
 
 @media (max-width: 768px) {
   .hero {
-    padding: 40px 24px;
-    margin-bottom: 40px;
+    padding: 40px 20px;
+    margin-bottom: 32px;
+    border-radius: var(--r-xl);
+  }
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+  }
+  .hero-badge {
+    font-size: 0.78rem;
+    padding: 5px 12px;
+    margin-bottom: 16px;
   }
   .hero-title {
-    font-size: 2.2rem;
+    font-size: 1.9rem;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
   }
   .hero-sub {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    padding: 0 4px;
   }
   .hero-stats {
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
     width: 100%;
-    padding: 24px;
+    padding: 16px 20px;
+    justify-content: space-around;
+  }
+  .stat-item {
+    flex: 1;
+    min-width: 70px;
+  }
+  .stat-num {
+    font-size: 1.5rem;
+  }
+  .stat-label {
+    font-size: 0.7rem;
   }
   .stat-divider {
-    width: 100%;
-    height: 1px;
+    display: none;
   }
-  .bundle-grid, .skill-grid {
+  /* Skill Explanation */
+  .skill-explanation {
+    margin-bottom: 32px;
+    border-radius: var(--r-xl);
+  }
+  .se-container {
     grid-template-columns: 1fr;
   }
+  .se-content {
+    padding: 28px 20px;
+  }
+  .se-title {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+  }
+  .se-desc {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+  .se-visual {
+    min-height: 220px;
+    order: -1;
+  }
+  .orbit-container {
+    width: 200px;
+    height: 200px;
+  }
+  .ring-1 { width: 120px; height: 120px; }
+  .ring-2 { width: 190px; height: 190px; }
+  .center-core {
+    width: 60px;
+    height: 60px;
+    font-size: 0.85rem;
+  }
+  .satellite {
+    width: 44px;
+    height: 44px;
+    font-size: 0.7rem;
+  }
+  /* Bundles section */
+  .bundles-section {
+    margin-bottom: 32px;
+  }
+  .section-header {
+    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .section-title {
+    font-size: 1.2rem;
+  }
+  .bundle-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .bundle-card {
+    padding: 24px 20px;
+  }
+  /* Market section */
+  .market-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .toolbar {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tb-btn {
+    white-space: nowrap;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+    flex-shrink: 0;
+  }
+  /* Filters */
   .filters-container {
-    padding: 20px;
+    padding: 16px;
+    border-radius: var(--r-xl);
+  }
+  .search-input {
+    font-size: 0.9rem;
+    padding: 12px 44px 12px 44px;
   }
   .filter-group {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
+    margin-bottom: 12px;
   }
   .fg-label {
     padding-top: 0;
+    width: auto;
   }
-  .se-content {
-    padding: 40px 24px;
+  .cat-chip, .tag-chip {
+    padding: 6px 14px;
+    font-size: 0.78rem;
   }
-  .se-title {
-    font-size: 1.75rem;
+  .skill-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  /* Export dropdown on mobile */
+  .export-menu {
+    right: auto;
+    left: 0;
+    min-width: 180px;
   }
 }
 </style>

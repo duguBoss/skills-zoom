@@ -81,19 +81,19 @@ function toggleFavBundle() {
 
     <template v-else>
       <!-- Bundle Hero -->
-      <div class="bundle-hero" :style="{ '--bcolor': bundle.color }">
+      <div class="bundle-hero" :style="{ '--bcolor': bundle?.color }">
         <div class="bundle-hero-bg"></div>
         <div class="bundle-hero-content">
-          <div class="bundle-hero-icon">{{ bundle.icon }}</div>
+          <div class="bundle-hero-icon">{{ bundle?.icon }}</div>
           <div class="bundle-hero-info">
             <div class="bundle-hero-badges">
-              <span class="bhbadge industry">{{ bundle.industry }}</span>
-              <span class="bhbadge difficulty">{{ bundle.difficulty }}</span>
+              <span class="bhbadge industry">{{ bundle?.industry }}</span>
+              <span class="bhbadge difficulty">{{ bundle?.difficulty }}</span>
             </div>
-            <h1 class="bundle-hero-name">{{ bundle.name }}</h1>
-            <p class="bundle-hero-desc">{{ bundle.description }}</p>
+            <h1 class="bundle-hero-name">{{ bundle?.name }}</h1>
+            <p class="bundle-hero-desc">{{ bundle?.description }}</p>
             <div class="bundle-hero-highlights">
-              <span v-for="h in (bundle.highlights || [])" :key="h" class="bhl-item">
+              <span v-for="h in (bundle?.highlights || [])" :key="h" class="bhl-item">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 {{ h }}
               </span>

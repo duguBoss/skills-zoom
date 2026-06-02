@@ -22,13 +22,19 @@ export const useBundlesStore = defineStore('bundles', () => {
 
   const allIndustries = computed(() => {
     const set = new Set<string>()
-    bundles.value.forEach(b => set.add(b.industry))
+    const list = bundles.value || []
+    list.forEach(b => {
+      if (b && b.industry) {
+        set.add(b.industry)
+      }
+    })
     return Array.from(set).sort()
   })
 
   const filteredBundles = computed(() => {
-    if (!selectedIndustry.value) return bundles.value
-    return bundles.value.filter(b => b.industry === selectedIndustry.value)
+    const list = bundles.value || []
+    if (!selectedIndustry.value) return list
+    return list.filter(b => b && b.industry === selectedIndustry.value)
   })
 
   function getBundleById(id: string): Bundle | undefined {
